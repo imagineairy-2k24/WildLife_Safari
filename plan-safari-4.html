@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Defininng the Experience | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .style-card {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .style-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(243, 190, 88, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .style-card.selected {
+            border-color: #f3be58;
+            background: rgba(243, 190, 88, 0.03);
+            box-shadow: 0 0 30px rgba(243, 190, 88, 0.1);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #f3be58 0%, #8c6500 100%);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl border-b border-white/5 flex justify-between items-center px-8 py-5 transition-all duration-500">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="flex items-center gap-6">
+        <a href="index.html" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Exit">close</a>
+    </div>
+</header>
+
+<main class="flex-grow pt-32 pb-48 px-6 max-w-7xl mx-auto w-full relative">
+    
+    <!-- Progress & Header -->
+    <div class="mb-20 text-center md:text-left reveal">
+        <div class="flex items-center justify-center md:justify-start gap-4 mb-6">
+            <p class="text-[10px] font-label uppercase tracking-[0.4em] text-primary font-extrabold items-center flex gap-2">
+                <span class="w-8 h-[1px] bg-primary/30"></span>
+                Step 04 of 05
+            </p>
+        </div>
+        <h1 class="text-5xl md:text-8xl font-headline font-bold leading-tight tracking-tight mb-8">
+            Defining the<br/><span class="italic text-primary font-normal">Experience</span>
+        </h1>
+        <div class="flex flex-col md:flex-row gap-8 items-start max-w-2xl">
+            <div class="p-5 bg-surface-container-low rounded-2xl border border-white/5 flex gap-5 shadow-xl">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                <p class="text-sm text-on-surface-variant font-light leading-relaxed">
+                    Every journey is meticulously vetted by our Field Directors to ensure total exclusivity, elite safety protocols, and unparalleled wildlife access.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        
+        <!-- Safari Style Selection -->
+        <section class="lg:col-span-8 space-y-12">
+            <div class="reveal">
+                <h3 class="text-[10px] font-label uppercase tracking-[0.4em] text-on-surface-variant mb-10 font-extrabold italic">Select Your Rhythm</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Card 1: Classic -->
+                    <div class="style-card group relative overflow-hidden rounded-2xl bg-surface-container-low cursor-pointer border border-white/5 p-2">
+                        <div class="h-60 overflow-hidden rounded-xl mb-6">
+                            <img class="w-full h-full object-cover grayscale transition-all duration-[1.5s] group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJliQY0F4Gwy7JINSdN42bB5pOHeWK3gAudOtc76QgIIdc32XDPISapHmoT64nGxTtWHPtJ71ULtdI1kthMfXmxfslC66-z_CUDgUlw9LWpU1D_QAgCfSMFEtEqLQ_43fDAKElETbjXC1arKd60hZwunsj632Q3CNDXtIzkxzNJPgeXzbhxRa7BypWhCopi5BOiXCCrZ0YEWbGPRMP49nzEGADQ0c0FLBA4EkEVjgI7Isra4x53I18SE3XEnX6XQdcnQRejgdKHmg"/>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-headline font-bold text-on-surface italic">Classic Canvas</h4>
+                                <span class="material-symbols-outlined text-on-surface/20 group-hover:text-primary transition-colors text-xl">radio_button_unchecked</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant font-light leading-relaxed">The timeless essence of exploration. Luxury mobile camps following the migration's natural flow.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Photography-led (Recommended) -->
+                    <div class="style-card selected group relative overflow-hidden rounded-2xl bg-surface-container-low cursor-pointer border border-primary/50 p-2">
+                        <div class="h-60 overflow-hidden rounded-xl mb-6">
+                            <img class="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgU-7STnj8FrSm92lu9UoNImEpW-NQK7jlw6pD9qpMxK3DATTATBg6i7gkflC0Y3lo8kuRIzy6dTmnAwFjiSE2WyYyJBqRrlKphQ2Cs2CCqKAbsdcAa-iiW-qURhm68I589pGDgZBSUjmOq3G-L6jEvbNdD_1q0vDgQze2VG-SWEgIQBWIqT4dXWT1WGKZdevZdk-O0MUZXJvAXIEFGbOu5YLWObf9qmuTR-eHsb-uxqBM3xR2kokDUucilqhlu8F3BEfmv-WW0Rc"/>
+                        </div>
+                        <div class="px-6 pb-6 relative">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-headline font-bold text-on-surface italic">Photography Mastery</h4>
+                                <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant font-light leading-relaxed">Dedicated vehicles with internal gimbal mounts and expert trackers focused on the perfect dawn encounters.</p>
+                            <div class="absolute -top-80 right-6 bg-primary text-on-primary text-[9px] font-extrabold px-4 py-2 tracking-[0.2em] uppercase rounded-full shadow-xl">Recommended</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Family -->
+                    <div class="style-card group relative overflow-hidden rounded-2xl bg-surface-container-low cursor-pointer border border-white/5 p-2">
+                        <div class="h-60 overflow-hidden rounded-xl mb-6">
+                            <img class="w-full h-full object-cover grayscale transition-all duration-[1.5s] group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUpb74JMu_9UhybxAtjTc1F1KmpKIgNN46q9YEOgQjuiDnElGgam76yMu1pz0lo4B3eIbzrAiAJ_o3kVss9q51UVmC6T2-4d0mrtdzpIdkYk-1ceOFI5xMLV2lO6XpugkDbwMBolgStrFu3aL7I6e08bC7ooTIoURtH52mRhn5YWtSbpc8K-wa6bK6yLeaFeEs_yx3luqcZxtporYN3XX-8aIDIK9mQixO9zcOpirKSBwJl4PariRwNJFSc38N5hFkGO7P2sANU0M"/>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-headline font-bold text-on-surface italic">Family Heritage</h4>
+                                <span class="material-symbols-outlined text-on-surface/20 group-hover:text-primary transition-colors text-xl">radio_button_unchecked</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant font-light leading-relaxed">Private villas and junior ranger programs designed to inspire the next generation of naturalists.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Private Luxury -->
+                    <div class="style-card group relative overflow-hidden rounded-2xl bg-surface-container-low cursor-pointer border border-white/5 p-2">
+                        <div class="h-60 overflow-hidden rounded-xl mb-6">
+                            <img class="w-full h-full object-cover grayscale transition-all duration-[1.5s] group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmHnc7fscT2QHRn90xdVUsg-ApTpEixe51PB2ipxiH-JICpL_jxSTS43MHmQfT3TA65a6wS4na42FNRaU2_vxFB0yfGgIGGVyqM_Fm0aiokbXZ7qdBXJmhri0Fy7P8yqcGd-uOs-2KHZpjeJaP5wpkE_l_uaWK5wZWLoND9_9BtjDEjqu578MsKpLuU2_CVomPKI30PJnOJaGm27ryXGQ5waTWufpHCGqWqgmvxSxOpU265_-WuRnXV2VVQtB1ozu6CSrHXylsoa8"/>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-headline font-bold text-on-surface italic">Absolute Seclusion</h4>
+                                <span class="material-symbols-outlined text-on-surface/20 group-hover:text-primary transition-colors text-xl">radio_button_unchecked</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant font-light leading-relaxed">Total privacy. Exclusive-use aircraft and estates with a dedicated 24/7 host and specialist team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget & Summary -->
+        <aside class="lg:col-span-4 space-y-10 reveal" style="transition-delay: 0.2s">
+            <div class="bg-surface-container rounded-3xl p-10 border border-white/5 shadow-3xl sticky top-32">
+                <h3 class="text-2xl font-headline font-bold mb-10 text-on-surface">Budget Allocation</h3>
+                <div class="space-y-6">
+                    <!-- Luxury -->
+                    <button class="w-full flex items-center justify-between p-6 rounded-2xl bg-surface-container-low hover:bg-white/5 transition-all group border border-transparent">
+                        <div class="text-left">
+                            <span class="text-primary font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Luxury</span>
+                            <span class="text-on-surface-variant text-xs opacity-60">From $1,500 / night / pp</span>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface/20 group-hover:text-primary transition-colors">radio_button_unchecked</span>
+                    </button>
+                    <!-- Ultra-Luxury -->
+                    <button class="w-full flex items-center justify-between p-6 rounded-2xl bg-primary/5 border border-primary/40 text-left">
+                        <div>
+                            <span class="text-primary font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Ultra-Luxury</span>
+                            <span class="text-on-surface-variant text-xs font-bold">From $3,500 / night / pp</span>
+                        </div>
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+                    </button>
+                    <!-- Bespoke -->
+                    <button class="w-full flex items-center justify-between p-6 rounded-2xl bg-surface-container-low hover:bg-white/5 transition-all group border border-transparent">
+                        <div class="text-left">
+                            <span class="text-primary font-bold uppercase tracking-[0.2em] text-[10px] block mb-1">Bespoke</span>
+                            <span class="text-on-surface-variant text-xs opacity-60">Total Custom Valuation</span>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface/20 group-hover:text-primary transition-colors">radio_button_unchecked</span>
+                    </button>
+                </div>
+
+                <div class="mt-16 pt-10 border-t border-white/5 space-y-10">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] font-label uppercase tracking-[0.3em] text-on-surface-variant font-bold">Estimated Total</span>
+                        <span class="text-4xl font-headline text-primary font-bold">$24,500</span>
+                    </div>
+                    <a href="plan-safari-5.html" class="w-full py-6 gradient-primary text-on-primary font-extrabold rounded-full tracking-[0.3em] uppercase text-[10px] hover:scale-[1.02] active:scale-95 transition-all shadow-2xl inline-block text-center whitespace-nowrap">
+                        Proceed to Review
+                    </a>
+                </div>
+                
+                <!-- Journey Maturity -->
+                <div class="mt-12 bg-background/40 p-6 rounded-2xl border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-[10px] font-label uppercase tracking-[0.3em] text-on-surface-variant font-bold">Journey Maturity</span>
+                        <span class="text-[10px] font-label text-primary font-bold">80%</span>
+                    </div>
+                    <div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+                        <div class="h-full bg-primary w-[80%] rounded-full shadow-[0_0_15px_rgba(243,190,88,0.3)]"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Navigation Actions -->
+    <div class="mt-24 flex justify-between items-center border-t border-white/5 pt-12">
+        <a href="plan-safari-3.html" class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] uppercase tracking-[0.4em] font-bold group">
+            <span class="material-symbols-outlined text-base group-hover:-translate-x-2 transition-transform">arrow_back</span>
+            Back: Expedition Team
+        </a>
+    </div>
+
+</main>
+
+
+
+<script>
+    // Reveal script
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Final Touches | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .selection-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .selection-card:hover {
+            border-color: rgba(243, 190, 88, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+            transform: translateY(-5px);
+        }
+        .selection-card.selected {
+            border-color: #f3be58;
+            background: rgba(243, 190, 88, 0.03);
+            box-shadow: 0 0 25px rgba(243, 190, 88, 0.05);
+        }
+        .glass-footer {
+            background: rgba(18, 20, 18, 0.8);
+            backdrop-filter: blur(32px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased relative">
+
+<!-- Background Decoration -->
+<div class="fixed inset-0 -z-10 opacity-30 pointer-events-none overflow-hidden">
+    <img class="w-full h-full object-cover scale-110 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUCC1o3S0Q7LPuKYe_P8eVLxLwNiernb5iFZYhD-tXLNWpIhBp4wawkSyfkqn7uAOGby-ltGvc-r4nGF8A0h1D3JlyAbjbLpfyKYIakoKo7WETmPnvF3A_01TvcUsHHiN5OXJJg2xvxUs40U9uK2hKx3d3A1-mYCspsaVtNdKljsHWQfKBz5Zj6xURxse2FQfp28M1fQ5ssiqk8Ua4jR1ropq5tYqsfp1x_--YOqCd88BixkC8QqbQ_Qe_eFTByzhxnopgfESTpIo"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background"></div>
+</div>
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl border-b border-white/5 flex justify-between items-center px-8 py-5 transition-all duration-500">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="flex items-center gap-6">
+        <a href="index.html" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Exit">close</a>
+    </div>
+</header>
+
+<main class="flex-grow pt-32 pb-48 px-6 max-w-7xl mx-auto w-full relative">
+    
+    <!-- Progress Indicator -->
+    <div class="fixed top-24 left-1/2 -translate-x-1/2 z-40 w-full max-w-md px-6 reveal">
+        <div class="bg-surface-variant/40 backdrop-blur-3xl p-1 rounded-full border border-white/5">
+            <div class="flex justify-between items-center px-4 mb-1">
+                <span class="text-[9px] font-label uppercase tracking-[0.4em] text-on-surface-variant font-extrabold">Final Phase 05 of 05</span>
+                <span class="text-[9px] font-label uppercase tracking-[0.4em] text-primary font-bold">Completion</span>
+            </div>
+            <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div class="h-full bg-primary w-full shadow-[0_0_15px_rgba(243,190,88,0.5)]"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Content -->
+    <div class="mb-20 reveal">
+        <h2 class="text-5xl md:text-8xl font-headline font-bold leading-tight tracking-tight mb-8">Refine Your <br/><span class="italic text-primary font-normal">Vision</span></h2>
+        <p class="text-on-surface-variant text-xl max-w-3xl font-light leading-relaxed opacity-70">
+            Tailor the granular details of your expedition. From the elusive apex predators you wish to track to the technical equipment you'll be carrying, every selection informs our Master Guides.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        
+        <!-- Selection Options -->
+        <div class="lg:col-span-7 space-y-20">
+            
+            <!-- Species Priorities -->
+            <section class="reveal">
+                <div class="flex items-center gap-6 mb-10">
+                    <span class="h-[1px] w-12 bg-primary/40"></span>
+                    <h3 class="font-label text-[10px] uppercase tracking-[0.4em] text-primary font-bold">Species Priorities</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="selection-card group relative overflow-hidden rounded-2xl bg-surface-container-low p-8 cursor-pointer border border-white/5">
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="material-symbols-outlined text-primary text-4xl">landscape</span>
+                            <div class="w-6 h-6 border border-white/10 rounded-md flex items-center justify-center group-hover:bg-primary/20 transition-all duration-500">
+                                <span class="material-symbols-outlined text-primary text-lg font-bold opacity-0 group-hover:opacity-100 italic transition-opacity">check</span>
+                            </div>
+                        </div>
+                        <h4 class="font-headline text-2xl mb-3 font-bold italic">The Big Five</h4>
+                        <p class="text-on-surface-variant text-sm font-light leading-relaxed">Lion, Leopard, Elephant, Buffalo, and Rhino. The foundational pillars of the African bush.</p>
+                    </div>
+                    <div class="selection-card group relative overflow-hidden rounded-2xl bg-surface-container-low p-8 cursor-pointer border border-white/5">
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="material-symbols-outlined text-primary text-4xl">pets</span>
+                            <div class="w-6 h-6 border border-white/10 rounded-md flex items-center justify-center group-hover:bg-primary/20 transition-all duration-500">
+                                <span class="material-symbols-outlined text-primary text-lg font-bold opacity-0 group-hover:opacity-100 italic transition-opacity">check</span>
+                            </div>
+                        </div>
+                        <h4 class="font-headline text-2xl mb-3 font-bold italic">Great Cats</h4>
+                        <p class="text-on-surface-variant text-sm font-light leading-relaxed">Focused tracking for Cheetahs, Tigers, or the rare Snow Leopard in specialized habitats.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Occasion Selection -->
+            <section class="reveal" style="transition-delay: 0.1s">
+                <div class="flex items-center gap-6 mb-10">
+                    <span class="h-[1px] w-12 bg-primary/40"></span>
+                    <h3 class="font-label text-[10px] uppercase tracking-[0.4em] text-primary font-bold">The Occasion</h3>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <button class="px-8 py-4 rounded-full bg-surface-container-high border border-white/5 hover:border-primary/40 transition-all font-label text-[10px] uppercase tracking-[0.3em] font-bold">Honeymoon</button>
+                    <button class="px-8 py-4 rounded-full bg-primary text-on-primary border border-primary font-label text-[10px] uppercase tracking-[0.3em] font-extrabold shadow-lg shadow-primary/20">Anniversary</button>
+                    <button class="px-8 py-4 rounded-full bg-surface-container-high border border-white/5 hover:border-primary/40 transition-all font-label text-[10px] uppercase tracking-[0.3em] font-bold">Family Milestone</button>
+                    <button class="px-8 py-4 rounded-full bg-surface-container-high border border-white/5 hover:border-primary/40 transition-all font-label text-[10px] uppercase tracking-[0.3em] font-bold">Private Exploration</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Side: Focus & Reassurance -->
+        <aside class="lg:col-span-5 space-y-12">
+            <div class="sticky top-40 space-y-10 reveal" style="transition-delay: 0.2s">
+                <!-- Photography Level -->
+                <div class="bg-surface-container rounded-3xl p-10 border border-white/5 shadow-3xl">
+                    <h3 class="font-headline text-2xl mb-8 font-bold text-on-surface">Photography Focus</h3>
+                    <div class="space-y-4">
+                        <label class="flex items-center gap-5 p-5 rounded-2xl bg-surface-container-lowest border border-white/5 cursor-pointer hover:bg-white/5 transition-all group">
+                            <input class="w-5 h-5 text-primary border-white/10 bg-transparent focus:ring-0 focus:ring-offset-0" name="photo" type="radio"/>
+                            <div>
+                                <span class="block text-sm font-bold text-on-surface mb-1">Amateur / Hobbyist</span>
+                                <span class="block text-[10px] text-on-surface-variant uppercase tracking-widest opacity-60">Smartphone or basic DSLR focus.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-5 p-5 rounded-2xl bg-primary/5 border border-primary/30 cursor-pointer">
+                            <input checked class="w-5 h-5 text-primary border-white/10 bg-transparent focus:ring-0 focus:ring-offset-0" name="photo" type="radio"/>
+                            <div>
+                                <span class="block text-sm font-bold text-primary mb-1">Enthusiast</span>
+                                <span class="block text-[10px] text-primary/60 uppercase tracking-widest font-bold">Dedicated gear, custom hides.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-5 p-5 rounded-2xl bg-surface-container-lowest border border-white/5 cursor-pointer hover:bg-white/5 transition-all group">
+                            <input class="w-5 h-5 text-primary border-white/10 bg-transparent focus:ring-0 focus:ring-offset-0" name="photo" type="radio"/>
+                            <div>
+                                <span class="block text-sm font-bold text-on-surface mb-1">Professional</span>
+                                <span class="block text-[10px] text-on-surface-variant uppercase tracking-widest opacity-60">Long lens, gimbal mounts, 24/7 tuition.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Final Note -->
+                <div class="p-8 border-l-2 border-primary bg-surface-container-low rounded-r-2xl shadow-xl">
+                    <p class="text-sm text-on-surface-variant font-light leading-relaxed italic">
+                        "Your consultation is bespoke, not automated. We respond within 24-48 hours with a curated itinerary draft designed exclusively for your team."
+                    </p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+</main>
+
+<!-- Booking Sticky Bar -->
+<footer class="fixed bottom-0 left-0 w-full z-50 glass-footer px-8 py-8 md:py-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="hidden md:block">
+            <p class="text-[9px] font-label uppercase tracking-[0.5em] text-primary font-extrabold mb-2 italic">Current Selection</p>
+            <p class="text-sm font-body text-on-surface/80 italic font-light">Serengeti Reserve · Anniversary · Enthusiast Photography</p>
+        </div>
+        <div class="flex items-center gap-10 w-full md:w-auto">
+            <a href="plan-safari-4.html" class="text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] uppercase tracking-[0.4em] font-extrabold group">
+                Back
+            </a>
+            <a href="plan-safari-confirmation.html" class="flex-1 md:flex-none px-20 py-5 bg-gradient-to-r from-primary to-primary/80 text-on-primary font-extrabold text-[10px] uppercase tracking-[0.5em] rounded-full shadow-[0_15px_40px_-5px_rgba(243,190,88,0.3)] hover:scale-[1.05] active:scale-95 transition-all duration-300 text-center inline-block">
+                Inquire Now
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reveal script
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+</script>
+
+</body>
+</html>

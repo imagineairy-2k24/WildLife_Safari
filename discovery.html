@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Discovery | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.2), rgba(18, 20, 18, 0.95));
+        }
+        .glass-nav {
+            background: rgba(18, 20, 18, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(243, 190, 88, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary antialiased">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-nav flex justify-between items-center px-12 py-5" id="navbar">
+    <div class="flex items-center gap-4">
+        <a href="index.html" class="material-symbols-outlined text-primary hover:rotate-90 transition-transform duration-500 cursor-pointer p-2 bg-surface-container rounded-full">arrow_back</a>
+    </div>
+    <div class="font-headline tracking-[0.25em] uppercase text-xl font-bold text-primary">WILDLENS</div>
+    <div class="flex items-center gap-8">
+        <button class="material-symbols-outlined text-on-background hover:text-primary transition-colors duration-300">search</button>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<header class="relative h-[60vh] w-full overflow-hidden flex items-end pb-20 px-12">
+    <div class="absolute inset-0 z-0">
+        <img alt="Serengeti Plains" class="w-full h-full object-cover brightness-[0.5]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLbgByMfQ6FBinV6f2uMNN61J0dB-vgPnUCIn8t0x3vSw99bh1A2oeOsZcdpYElfe_iEX1LzuISzD_xXvi1ebTVuikSJVh34yiFw1QHXxvmL-apT5ek5WFTwBlBqJrQjFm_jQSf4gYA1iwscfHeNcEy0j3YqSIovQJElo9fdqPEEBmuZzVHD9KEmvETOCDDewRvRQlC-9ZXJCmQ1hHYWpW7Nm8E2gLGghOgbihUhC6VtL9JkzEdFUN2rM3ULyzD5Cau8Rhf_YAhw"/>
+        <div class="absolute inset-0 hero-gradient"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl">
+        <p class="text-primary font-label text-xs uppercase tracking-[0.4em] mb-4">Discovery</p>
+        <h1 class="font-headline text-5xl md:text-7xl font-bold text-on-surface leading-tight">The Great Reserves</h1>
+        <p class="text-on-surface-variant text-xl mt-6 font-light max-w-2xl leading-relaxed">Explore the world's last wild sanctuaries, curated for those who seek the extraordinary.</p>
+    </div>
+</header>
+
+<main class="py-24 px-12 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Destination Card 1 -->
+        <div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant group">
+            <div class="aspect-video overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz_zEQbg_yO30otAylTVhsdbo3TQ-pK4FFPcthKadtf6E8rz8uxkQdGAI4AjzG3t5gR1vWZqp5l1GVKv9WJPlSlKqZ8hn5tXfiU5N2MO48mWf3FnQ9RoglvcAesiGxViun_NpzUjx1-Y7Eyghq9VCVmEGLENVgvCPDhl6RT0W4wwtXrqm03TEjc38daLMtYPUqmiIXRbdmzjJmEnl8s-bWYr6Q163nlY_y2N8VxSwfOxkAR6I26AnUmTns0nFJaa0VJ268_yzCMv4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+            </div>
+            <div class="p-10">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="font-headline text-3xl text-on-surface mb-2">Maasai Mara</h3>
+                    </div>
+                    <span class="text-primary font-label text-[10px] uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">Kenya</span>
+                </div>
+                <div class="space-y-4 mb-10">
+                    <div class="flex gap-4 items-center text-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary">calendar_today</span>
+                        <p><strong class="text-on-surface">Best Season:</strong> July to October</p>
+                    </div>
+                    <div class="flex gap-4 items-center text-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary">landscape</span>
+                        <p><strong class="text-on-surface">Signature:</strong> The Great Migration</p>
+                    </div>
+                </div>
+                <button class="w-full py-4 border border-primary/20 text-primary uppercase tracking-widest text-xs font-bold hover:bg-primary hover:text-on-primary transition-all rounded-lg">Explore Details</button>
+            </div>
+        </div>
+
+        <!-- Destination Card 2 -->
+        <div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant group">
+            <div class="aspect-video overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO2m9Rd5WlSJQP9jDdWmpzZYfcv3mBJ7axXW8-F8yoKiOv99Tx-iRKAdi2_IP5J7q9DbwrxDf0ks__fgpCupb1SuGSgVgLRjtRYLi-zT4bwqeTMl7x0WNYfwILsV446p-L6aT5yF5JOKTCC-Y3WJP8eQcXI9m_VD__DKrKil0-8vmx-T_cQYYndCZV82rlDmyLVwzPvrYvcnO81jiR4Edq0VyNPBB0OEEwT1anZ_soctnrO7bIzo05mA-x6hDumLDhZKK_BXCUjZQ" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+            </div>
+            <div class="p-10">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="font-headline text-3xl text-on-surface mb-2">Okavango Delta</h3>
+                    </div>
+                    <span class="text-primary font-label text-[10px] uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">Botswana</span>
+                </div>
+                <div class="space-y-4 mb-10">
+                    <div class="flex gap-4 items-center text-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary">calendar_today</span>
+                        <p><strong class="text-on-surface">Best Season:</strong> May to August</p>
+                    </div>
+                    <div class="flex gap-4 items-center text-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary">water_drop</span>
+                        <p><strong class="text-on-surface">Signature:</strong> Mokoro Water Safaris</p>
+                    </div>
+                </div>
+                <button class="w-full py-4 border border-primary/20 text-primary uppercase tracking-widest text-xs font-bold hover:bg-primary hover:text-on-primary transition-all rounded-lg">Explore Details</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-surface-container-lowest w-full py-20 px-12 border-t border-outline-variant text-center">
+    <div class="text-primary font-headline text-2xl mb-8 tracking-[0.2em] font-bold">WILDLENS</div>
+    <p class="text-on-surface-variant/40 text-[10px] uppercase tracking-widest">© 2024 WildLens Reserve. Cinematic Naturalist Expeditions.</p>
+</footer>
+
+</body>
+</html>

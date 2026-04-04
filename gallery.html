@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Expedition Gallery | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .bento-card {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
+
+<!-- Header -->
+<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="hidden md:flex items-center gap-10">
+        <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
+        <a href="gallery.html" class="font-label text-[10px] tracking-[0.3em] text-primary uppercase transition-all font-bold">Gallery</a>
+        <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
+        <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center gap-10 p-12">
+    <button id="menu-close" class="absolute top-10 right-10 text-primary p-2">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    
+    <div class="text-primary font-headline text-lg tracking-[0.4em] font-bold uppercase italic mb-8">WILDLENS</div>
+    
+    <a href="index.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Home</a>
+    <a href="explore.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Explore</a>
+    <a href="gallery.html" class="font-headline text-4xl text-primary transition-all font-bold italic">Gallery</a>
+    <a href="plan-safari-1.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Plan Expedition</a>
+    
+    <div class="mt-20 flex flex-col items-center gap-6">
+        <p class="font-label text-on-surface-variant/40 text-[10px] uppercase tracking-widest font-bold">Contact Mission Control</p>
+        <p class="font-label text-primary text-xl uppercase tracking-widest font-bold">+254 800 555 0123</p>
+    </div>
+</div>
+
+<main class="flex-grow pt-32 pb-48 px-6 md:px-12 max-w-7xl mx-auto w-full space-y-32">
+    
+    <!-- Hero: The Big Five Section -->
+    <section class="reveal">
+        <div class="mb-12">
+            <span class="font-label text-[10px] uppercase tracking-[0.5em] text-primary mb-4 block font-extrabold italic">Featured Series</span>
+            <h2 class="text-5xl md:text-7xl font-headline font-bold tracking-tight max-w-4xl leading-tight text-on-surface">
+                The Big Five:<br/><span class="italic text-primary font-normal">A Photographic Study</span>
+            </h2>
+        </div>
+        
+        <!-- Asymmetric Bento-style Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[800px]">
+            <div class="md:col-span-8 bento-card relative group overflow-hidden rounded-2xl border border-white/5">
+                <img class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.8] group-hover:brightness-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGAY9YT3y_i-vZ0w4tJTrqaIldMDD3PmzpPf5G1jpxwNMZF8w8n5GFOYKCnfuKWjv6L_wEt-2znTy-7lpoLEI0ZMTGG7XMoQ0W1frQKGNprPSWt3EgAVdCFMzHlbnA0KtP0uonbj4mcJELja3QTM8ESRmn7E_z9j3OlEWWslIkiwLoSfRuffX1f-sLs3_8skEziAXPhy8iEsZ6BBP0DT2r1kNgKXZgUGqwwyDC2sx_T5HRUdP-GLZPu7k3suowWMgeMSeVl2QDnQw"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90 transition-opacity group-hover:opacity-60"></div>
+                <div class="absolute bottom-10 left-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                    <p class="font-label text-[10px] uppercase tracking-[0.5em] text-primary font-extrabold mb-4 italic">National Sanctuary • 01</p>
+                    <h3 class="text-4xl md:text-5xl font-headline font-bold text-white italic">The King's Respite</h3>
+                </div>
+            </div>
+            
+            <div class="md:col-span-4 grid grid-rows-2 gap-8">
+                <div class="bento-card relative group overflow-hidden rounded-2xl border border-white/5">
+                    <img class="w-full h-full object-cover grayscale brightness-50 transition-all duration-[1.5s] group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDft9EKd2dzokmK2qq2S56RYDq5OXKoDV8JT4mhicARF99HvrCsbtLpSy84k3Jg0bPJmmSEC5ipbxDXdN6qzAuH5y9MbCi3Fb1lRefKCCaDw0_uJcOmPSBvqMZc8nEQt49IbwN2BMHQWch4OSBJ3Cv6PoQE64KZ98xUt8pdjOt4zg-9IaNRjfsnBURT_9JflBg0vNwXD8CRlmn6fzC1MfYClq8_uKOSy8atqWztkJDfcyiWiHiLtrFZ2nlN90x2YOvNRV0e0Sjmxy0"/>
+                    <div class="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="text-2xl font-headline font-bold text-white italic">Ancient Wisdom</h3>
+                    </div>
+                </div>
+                <div class="bento-card relative group overflow-hidden rounded-2xl border border-white/5">
+                    <img class="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Bx9WoVOMVkST4Tifpm88JnhDMbB2fsAdAXWn5imMyebZBXr4W-R6C-fSfGgpBP4qgGRNPh2JhORuslKYNv8FeSaBpBa5wF5Gxqd8UdRZUiW5mbsFg9-GKkE8j_jyikFarGjgetXpP-B9i0f_ZqwY8UAOEQV2xgWxZbZAsmi-g0RRzfQIwtroL6j1jNTVX7_gWL_1Vp5fUS1fJ9WBpafgd3w53u0DzvvC_ZyOe9uohPY8sMWObzQZDd6Zud2NYZLiZIXDXLTnROE"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="text-2xl font-headline font-bold text-white italic">Silent Watcher</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Golden Hour: Cinematic Shorts -->
+    <section class="reveal">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div class="max-w-2xl">
+                <span class="font-label text-[10px] uppercase tracking-[0.5em] text-primary mb-4 block font-extrabold italic">In Motion</span>
+                <h2 class="text-4xl md:text-6xl font-headline font-bold leading-tight text-on-surface">Golden Hour:<br/><span class="text-primary italic font-normal">Cinematic Shorts</span></h2>
+            </div>
+            <button class="text-primary font-label text-[10px] uppercase tracking-[0.4em] border-b border-primary/30 pb-2 hover:border-primary transition-all font-extrabold flex items-center gap-4 group">
+                View All Films
+                <span class="material-symbols-outlined text-base group-hover:translate-x-2 transition-transform">arrow_forward</span>
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Video Card 1 -->
+            <div class="group relative aspect-video bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-3xl border border-white/5">
+                <img class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyRlRMFG_CpXxFOAgUB4p27FN2QO8zbQKS3d-pKn059iOQLAH8ocvsx0M9CuMvdF44TElJxs1NDsXp7f-EWHadHVET0Cs49m-IGVH1fuFqKhw9hBJleFEbNhMK7VZCLvovYlBP9g-uWzm1dJExINKzuj_2O-JZp547Nxv0jDoXg5-GVK8FhexTjcC-U6mwFBLuBcFt1LuQ3Lj-1_wctfI2HmtRP6KEQUjOAelmZwVxkh9v6fJaxzD_t5tjTyUxjyWnrtehuKRUw1s"/>
+                <div class="absolute inset-0 bg-background/20 flex items-center justify-center transition-all group-hover:bg-background/10">
+                    <div class="w-20 h-20 rounded-full bg-primary/20 backdrop-blur-xl border border-white/20 flex items-center justify-center group-hover:scale-125 group-hover:bg-primary group-hover:border-primary transition-all">
+                        <span class="material-symbols-outlined text-white text-4xl group-hover:text-on-primary" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 w-full p-8 bg-gradient-to-t from-background to-transparent">
+                    <p class="text-white text-xl font-headline font-bold mb-1 italic">Chasing the Dawn</p>
+                    <p class="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold opacity-60">02:45 • Highveld Reserve</p>
+                </div>
+            </div>
+            
+            <!-- Video Card 2 -->
+            <div class="group relative aspect-video bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-3xl border border-white/5">
+                <img class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9VuKR2uVwCkV4S3gDIPl0orz6nXzL_sa949glywyx2BMpHnLBcuzZFcymxrkvXEHrcc8EQM2SWAcPYeA-ADTYtbUT-awbe5USS4t7uGW956F8LEksTnaPVCExNrUzARd2dMapBJmCSjEZqaOAeOzXMXkwBG-8Ld-CEuteAV3VRhfDmUkiD6dBGFo63qD7LFIvg6VndoXKvzOl8GzKwkBOIEyWfyKMRlWK9NmMn2ZoYQwgrwXFrczaaqhj5r8B8hTqlQx6pZR6CuQ"/>
+                <div class="absolute inset-0 bg-background/20 flex items-center justify-center transition-all group-hover:bg-background/10">
+                    <div class="w-20 h-20 rounded-full bg-primary/20 backdrop-blur-xl border border-white/20 flex items-center justify-center group-hover:scale-125 group-hover:bg-primary group-hover:border-primary transition-all">
+                        <span class="material-symbols-outlined text-white text-4xl group-hover:text-on-primary" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 w-full p-8 bg-gradient-to-t from-background to-transparent">
+                    <p class="text-white text-xl font-headline font-bold mb-1 italic">The Pride Movement</p>
+                    <p class="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold opacity-60">01:12 • Ngorongoro</p>
+                </div>
+            </div>
+            
+            <!-- Video Card 3 -->
+            <div class="group relative aspect-video bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-3xl border border-white/5">
+                <img class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf3U9_2yEaGeaIWevl4smcnwHQU34-bk6Dd_0Iv3iQ1Cxz65gakXbSHLbr1qkhzwNBXxDlyXb1HQCzCVl4BLfXU4NC1rMZQzoIUqrFo7EfPSMRKDdDEtt3el1ZzustDghON8vHw4cc5zHAhHMJLQ3XqpZMdJXpBoYiWTEVJ9HfvsiLg0d5fb0doVpU9CzKCHsB-5MzNu2wkfFwHG2qr2zYfrttF_cuRaHpPJEyXU5-DEWdv_xyNm9AfQ8C4DxL5YAIX81yReTRFk8"/>
+                <div class="absolute inset-0 bg-background/20 flex items-center justify-center transition-all group-hover:bg-background/10">
+                    <div class="w-20 h-20 rounded-full bg-primary/20 backdrop-blur-xl border border-white/20 flex items-center justify-center group-hover:scale-125 group-hover:bg-primary group-hover:border-primary transition-all">
+                        <span class="material-symbols-outlined text-white text-4xl group-hover:text-on-primary" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 w-full p-8 bg-gradient-to-t from-background to-transparent">
+                    <p class="text-white text-xl font-headline font-bold mb-1 italic">Watering Hole Rhythms</p>
+                    <p class="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold opacity-60">03:20 • Zambezi Basin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Through the Guest Lens Section -->
+    <section class="pb-24 reveal">
+        <div class="text-center mb-24">
+            <span class="font-label text-[10px] uppercase tracking-[0.5em] text-primary mb-4 block font-extrabold italic">The Community</span>
+            <h2 class="text-4xl md:text-6xl font-headline font-bold text-on-surface">Through the <span class="italic text-primary font-normal">Guest Lens</span></h2>
+        </div>
+        
+        <div class="columns-1 md:columns-3 gap-10 space-y-10">
+            <!-- Masonry Layout -->
+            <div class="break-inside-avoid bg-surface-container-low rounded-2xl p-6 border border-white/5 space-y-6 group">
+                <div class="overflow-hidden rounded-xl h-auto">
+                    <img class="w-full h-auto transition-transform duration-[1.5s] group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFA7pNOb9epXDoIIARW39oEUhelAx9BP8jOIykOsenefHVx0SzqmMYtw-atym-cQnrOQJx0UHFa2IXTtCoILx65sur-YULY4Gq7vTyqhkDaUR-mCtVy599iv9qVc0rFQt-qoLCRb3vXZDx9OTqaBrpXukD42_WSDDxnizdVbSTZSQJFGPJljDQ3y_Hr9JCelOjqiz3QxF9rsGTBMZ-VKSEpi6kU3NdOIB3Mo-VqpfZV1WLKmBRLWbcmEqZkE_eGRXzC_NgSYX1y00"/>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-on-surface italic text-lg font-light leading-relaxed">"A moment of perfect symmetry in the wild."</p>
+                    <p class="text-[9px] text-primary font-extrabold uppercase tracking-widest">— Elena R., July 2023</p>
+                </div>
+            </div>
+            
+            <div class="break-inside-avoid bg-surface-container-low rounded-2xl p-6 border border-white/5 space-y-6 group">
+                <div class="overflow-hidden rounded-xl h-auto">
+                    <img class="w-full h-auto transition-transform duration-[1.5s] group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuW6MH-H8aV_5i7ZIAWPu1sjCgfDiDq3hqJXgjVggDg_2LWkMeemixUcr5B1YngHr0rTsL8dQJrPPk1XG2EVGvM4RRpNidwABh8KsukIGD7Y_zJTIkMDHXZGVPYhUP78yFj369N0LZEHdhScD61K58T7g9WRy5keSk0kojgIqrdGxeVmvF6qvuIL4ffFGRoBq63qKicH82fhvjSwSyuJZXAV6MCgSRPMFrFxZrsKOh2nVA7xifsvXiLBwzZFosB75rP2mi40hLEDk"/>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-on-surface italic text-lg font-light leading-relaxed">"The delta from above is a living masterpiece."</p>
+                    <p class="text-[9px] text-primary font-extrabold uppercase tracking-widest">— Mark T., August 2023</p>
+                </div>
+            </div>
+            
+            <div class="break-inside-avoid bg-surface-container-low rounded-2xl p-6 border border-white/5 space-y-6 group">
+                <div class="overflow-hidden rounded-xl h-auto">
+                    <img class="w-full h-auto transition-transform duration-[1.5s] group-hover:scale-105 grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQTAnt-OJRSv-sbygJMdxzic0kKBfPd1XmR1cqetSQEWpnwqo30oDXzdGcLC0J6E_Km1Y0YcynV0tJ35ba4UlVRjIKLnNGn8UcezVF1WhPD9L5rGXzlQJYSiQe2dtfHluqB4VpyJ8PlZhcQulsxcSTOrA4Xi9CypSO9xyqBpicmvf2LvXRGLWKmAXKiB0qLK4kbAyOV8HuaTCeG3WJurgp-E-zjeeHW82WmIltP_r-AZeAjgFXZqMRYu4Y3ZSluqO6-Q2xK8mXFc0"/>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-on-surface italic text-lg font-light leading-relaxed">"Focus like no other predator."</p>
+                    <p class="text-[9px] text-primary font-extrabold uppercase tracking-widest">— Sarah J., June 2023</p>
+                </div>
+            </div>
+
+            <div class="break-inside-avoid bg-surface-container-low rounded-2xl p-6 border border-white/5 space-y-6 group">
+                <div class="overflow-hidden rounded-xl h-auto">
+                    <img class="w-full h-auto transition-transform duration-[1.5s] group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVH8jlNu1zH76rQG-q2she1YeWL6JMhXUpXy23LjD5rVy5m2JA4gvW_gp_-MFU4nBhRsMqLP2rIBZa6DXtQe6GYiEEvPFXbjQ4yaajXv8SAQQjoj5WMnksEMM5UAT0g01LXNqE3GOjfS-pEUqUO8aZ5Jlx952K7ZEwDn6FILP_gICM5LL8VfR_OTPFNhH4RqrG7eBD4PwPyvNZZZim5ToqLMf9zJUg_LQTG6uwJl9AcgEWunf5MnNo2yjXsxlOEDj-Ux4ml8lZBY8"/>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-on-surface italic text-lg font-light leading-relaxed">"Gentle giants in the morning dew."</p>
+                    <p class="text-[9px] text-primary font-extrabold uppercase tracking-widest">— David W., Sept 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-24 bg-surface border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12">
+        <div class="text-primary font-headline text-2xl tracking-[0.4em] font-bold uppercase italic">WILDLENS RESERVE</div>
+        <div class="flex flex-wrap justify-center gap-12 text-[10px] font-label uppercase tracking-[0.4em] font-bold">
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="explore.html">Expeditions</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Conservation</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="index.html">Our Story</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Legal</a>
+        </div>
+        <div class="text-on-surface-variant/20 font-label text-[10px] uppercase tracking-[0.6em] text-center italic">
+            © 2024 THE CINEMATIC NATURALIST. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reveal script
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && menuClose && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

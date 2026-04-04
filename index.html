@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>WildLens Reserve | Cinematic Naturalist Expeditions</title>
+    <meta name="description" content="Experience the raw beauty of nature through expert-led, custom-tailored wildlife odysseys. Witness the extraordinary.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "surface-container-highest": "#333533",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in-out': 'zoomInOut 20s infinite alternate ease-in-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        zoomInOut: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.1), rgba(18, 20, 18, 0.95));
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3be58 0%, #a67c00 100%);
+        }
+        .glass-nav {
+            background: rgba(18, 20, 18, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(243, 190, 88, 0.1);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121412;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333533;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f3be58;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary antialiased">
+
+<!-- Header -->
+<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="hidden md:flex items-center gap-10">
+        <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
+        <a href="gallery.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Gallery</a>
+        <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
+        <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center gap-10 p-12">
+    <button id="menu-close" class="absolute top-10 right-10 text-primary p-2">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    
+    <div class="text-primary font-headline text-lg tracking-[0.4em] font-bold uppercase italic mb-8">WILDLENS</div>
+    
+    <a href="index.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Home</a>
+    <a href="explore.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Explore</a>
+    <a href="gallery.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Gallery</a>
+    <a href="plan-safari-1.html" class="font-headline text-4xl text-primary font-bold italic">Plan Expedition</a>
+    
+    <div class="mt-20 flex flex-col items-center gap-6">
+        <p class="font-label text-on-surface-variant/40 text-[10px] uppercase tracking-widest font-bold">Contact Mission Control</p>
+        <p class="font-label text-primary text-xl uppercase tracking-widest font-bold">+254 800 555 0123</p>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section class="relative min-h-screen w-full flex items-center justify-center lg:justify-start overflow-hidden">
+    <!-- Background Layer (Mesh Gradient) -->
+    <div class="absolute inset-0 z-0 select-none pointer-events-none bg-[#0d0f0d]">
+        <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_30%,#f3be58_0%,transparent_30%),radial-gradient(circle_at_80%_70%,#412d00_0%,transparent_40%)]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+    </div>
+    
+    <div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-20 items-center min-h-screen pt-24 lg:pt-0">
+        <!-- Visual Column (Mobile Top) -->
+        <div class="w-full lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s">
+            <div class="relative w-full max-w-[420px] lg:max-w-[540px] aspect-[4/5] lg:aspect-[3/4.5] overflow-hidden rounded-b-[40px] lg:rounded-none group shadow-3xl">
+                <img alt="The King's Respite" class="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110 grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNa7t6kkYc_xSdXM0mQpxcKuzIeQ9fgfl7E_rY09p7o4lvf-353LNmD75HxfRC-pMSpt3RU5Fv_5Kn4x0iHfWh8cTVb2io-RIMFhChUToLVRpRldmubm0fvpHgT-PUmpSeMjTG98-UBHmwqz_mWtsk9Az1XwevODleg-eewKjX0xkvZLB1ZdWT4IkZkLpxT28qPnSnAcEmkKmF4sgslQSIAiQFEiwe0Ps2t7_qxGhF8nLAGNs_asnO2NxQiCJXncJDLxkqTfqG2p0"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-background/95 via-transparent to-transparent opacity-100 transition-opacity"></div>
+                <!-- Top edge blend for mobile -->
+                <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent lg:hidden"></div>
+                <div class="absolute bottom-8 lg:bottom-10 left-8 lg:left-10 right-8 lg:right-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-6 h-[1px] bg-primary"></span>
+                        <p class="text-primary font-label text-[9px] uppercase tracking-widest font-extrabold italic">Featured Sanctuary</p>
+                    </div>
+                    <h3 class="text-white font-headline text-2xl lg:text-4xl italic font-bold leading-tight">The King's <br/>Respite</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Column (Mobile Bottom) -->
+        <div class="w-full lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left px-6 pb-20 lg:pb-0 order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6 lg:mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.4s">
+                <span class="w-12 h-[1px] bg-primary/40 hidden lg:block"></span>
+                <p class="font-label text-primary text-[10px] md:text-xs lg:text-sm uppercase tracking-[0.5em] font-extrabold italic text-center lg:text-left">The Expedition Collective • 2024</p>
+            </div>
+            
+            <h1 class="font-headline text-white text-3xl md:text-6xl lg:text-8xl leading-[1.15] lg:leading-[0.95] mb-10 lg:mb-16 drop-shadow-2xl font-bold opacity-0 animate-fade-in-up" style="animation-delay: 0.6s">
+                Ordinary Travel Ends.<br/><span class="text-primary italic font-normal tracking-wide">Extraordinary</span><br class="hidden lg:block"/> Encounters Begin.
+            </h1>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-8 w-full opacity-0 animate-fade-in-up" style="animation-delay: 0.8s">
+                <a href="plan-safari-1.html" class="gold-gradient text-on-primary font-extrabold px-12 lg:px-16 py-5 lg:py-6 rounded-full shadow-[0_20px_50px_-10px_rgba(243,190,88,0.4)] hover:scale-105 active:scale-95 transition-all uppercase tracking-[0.4em] text-[10px] inline-block whitespace-nowrap min-w-[240px] sm:min-w-0">
+                    Plan Your Safari
+                </a>
+                <a href="explore.html" class="bg-white/5 border border-white/10 text-white px-12 lg:px-16 py-5 lg:py-6 rounded-full hover:bg-white/10 transition-all uppercase tracking-[0.4em] text-[10px] backdrop-blur-3xl inline-block font-extrabold whitespace-nowrap min-w-[240px] sm:min-w-0">
+                    Explore Sanctums
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce opacity-40 hover:opacity-100 transition-opacity z-20">
+        <span class="font-label text-[10px] tracking-[0.4em] uppercase text-white font-bold">Scroll</span>
+        <div class="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"></div>
+    </div>
+</section>
+
+<!-- Section 1: The WildLens Philosophy -->
+<section class="py-32 px-6 md:px-12 bg-surface-container-lowest">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-20">
+        <div class="lg:w-1/2 reveal">
+            <p class="font-label text-primary text-xs uppercase tracking-[0.4em] mb-6">Our Ethos</p>
+            <h2 class="font-headline text-4xl md:text-6xl leading-tight text-on-surface font-bold mb-8">The WildLens<br/>Philosophy</h2>
+            <div class="grid grid-cols-2 gap-12 mt-12">
+                <div>
+                    <span class="block text-4xl md:text-5xl font-headline text-primary mb-3">12+</span>
+                    <span class="font-label text-[10px] md:text-xs uppercase tracking-widest text-outline">Years of Field Mastery</span>
+                </div>
+                <div>
+                    <span class="block text-4xl md:text-5xl font-headline text-primary mb-3">100%</span>
+                    <span class="font-label text-[10px] md:text-xs uppercase tracking-widest text-outline">Custom Itineraries</span>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-1/2 reveal" style="transition-delay: 0.2s">
+            <p class="font-body text-xl md:text-2xl leading-relaxed text-on-surface-variant font-light mb-10 first-letter:text-5xl first-letter:font-headline first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+                We do not offer tours; we curate cinematic odysseys. Each WildLens expedition is an expert-led, custom-tailored journey designed for those who seek to witness nature's rawest moments through a lens of profound respect and artistry.
+            </p>
+            <p class="text-on-surface-variant/70 text-lg leading-relaxed mb-8">
+                Our approach combines the precision of high-end logistics with the spontaneity of the wild. We believe that true discovery requires both patience and presence.
+            </p>
+            <a href="#" class="inline-flex items-center gap-4 text-primary font-label text-xs uppercase tracking-widest group">
+                Discover our story
+                <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Featured Destinations (Editorial Grid) -->
+<section class="py-32 px-6 md:px-12 bg-surface relative overflow-hidden">
+    <!-- Abstract Accent -->
+    <div class="absolute -right-20 top-40 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+    
+    <div class="max-w-7xl mx-auto mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 reveal">
+        <div>
+            <p class="font-label text-primary text-xs uppercase tracking-[0.4em] mb-4">Discovery</p>
+            <h2 class="font-headline text-4xl md:text-5xl text-on-surface font-bold">Featured Destinations</h2>
+        </div>
+        <a class="text-primary font-label text-[10px] uppercase tracking-[0.3em] border-b border-primary/20 pb-2 hover:border-primary transition-all duration-500 hover:tracking-[0.4em]" href="explore.html">View All Expeditions</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto">
+        <!-- Maasai Mara -->
+        <div class="md:col-span-7 relative group overflow-hidden rounded-lg aspect-[16/10] reveal">
+            <img alt="Maasai Mara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz_zEQbg_yO30otAylTVhsdbo3TQ-pK4FFPcthKadtf6E8rz8uxkQdGAI4AjzG3t5gR1vWZqp5l1GVKv9WJPlSlKqZ8hn5tXfiU5N2MO48mWf3FnQ9RoglvcAesiGxViun_NpzUjx1-Y7Eyghq9VCVmEGLENVgvCPDhl6RT0W4wwtXrqm03TEjc38daLMtYPUqmiIXRbdmzjJmEnl8s-bWYr6Q163nlY_y2N8VxSwfOxkAR6I26AnUmTns0nFJaa0VJ268_yzCMv4"/>
+            <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
+                <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Kenya</p>
+                <h3 class="font-headline text-3xl md:text-5xl text-white mb-4">Maasai Mara</h3>
+                <p class="text-on-surface/70 font-body text-sm md:text-base max-w-md transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">Home of the Great Migration and the world's most legendary predator sightings.</p>
+            </div>
+        </div>
+        
+        <!-- Serengeti -->
+        <div class="md:col-span-5 relative group overflow-hidden rounded-lg aspect-[16/10] md:aspect-auto reveal" style="transition-delay: 0.1s">
+            <img alt="Serengeti" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLbgByMfQ6FBinV6f2uMNN61J0dB-vgPnUCIn8t0x3vSw99bh1A2oeOsZcdpYElfe_iEX1LzuISzD_xXvi1ebTVuikSJVh34yiFw1QHXxvmL-apT5ek5WFTwBlBqJrQjFm_jQSf4gYA1iwscfHeNcEy0j3YqSIovQJElo9fdqPEEBmuZzVHD9KEmvETOCDDewRvRQlC-9ZXJCmQ1hHYWpW7Nm8E2gLGghOgbihUhC6VtL9JkzEdFUN2rM3ULyzD5Cau8Rhf_YAhw"/>
+            <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
+                <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Tanzania</p>
+                <h3 class="font-headline text-3xl md:text-4xl text-white mb-4">Serengeti</h3>
+                <p class="text-on-surface/70 font-body text-sm max-w-sm transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">An endless theater of life where the horizon is only broken by the movement of millions.</p>
+            </div>
+        </div>
+
+        <!-- Okavango Delta -->
+        <div class="md:col-span-5 relative group overflow-hidden rounded-lg aspect-[16/10] md:aspect-auto reveal">
+            <img alt="Okavango" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO2m9Rd5WlSJQP9jDdWmpzZYfcv3mBJ7axXW8-F8yoKiOv99Tx-iRKAdi2_IP5J7q9DbwrxDf0ks__fgpCupb1SuGSgVgLRjtRYLi-zT4bwqeTMl7x0WNYfwILsV446p-L6aT5yF5JOKTCC-Y3WJP8eQcXI9m_VD__DKrKil0-8vmx-T_cQYYndCZV82rlDmyLVwzPvrYvcnO81jiR4Edq0VyNPBB0OEEwT1anZ_soctnrO7bIzo05mA-x6hDumLDhZKK_BXCUjZQ"/>
+            <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
+                <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Botswana</p>
+                <h3 class="font-headline text-3xl md:text-4xl text-white mb-4">Okavango Delta</h3>
+                <p class="text-on-surface/70 font-body text-sm max-w-sm transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">Navigate a water-bound paradise teeming with rare avian life and aquatic predators.</p>
+            </div>
+        </div>
+
+        <!-- Kaziranga -->
+        <div class="md:col-span-7 relative group overflow-hidden rounded-lg aspect-[16/10] reveal" style="transition-delay: 0.1s">
+            <img alt="Kaziranga" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG9sqmJ9ALTMturbEW74TuoDWkZ3dd_4Z7Wyf_2UX-Z0iqp0VjUeBc8A-k0XEsoygVRp5bATrEJI6skSTp4ZHlPOjyCHNvQUua9QFcUnG_8uweeO_KGTJoaBK4sxCdGwXKlMdSBVg7_9z2zxC8sqIhxIVBV_630KuUFWXUo3H4YzLT93bO7Rt3kSXvz7nNFJhnCCGMBfI17Wucip4eVWuAcEqKPGVpoBIZ8IvN_FtN7LUh7QZNeFfpaY7rCnddFhpEuJk9uI-CqfU"/>
+            <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
+                <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">India</p>
+                <h3 class="font-headline text-3xl md:text-5xl text-white mb-4">Kaziranga</h3>
+                <p class="text-on-surface/70 font-body text-sm md:text-base max-w-md transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">The misty sanctuary of the Great One-horned Rhinoceros and the elusive Bengal tiger.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: The Process -->
+<section class="py-32 px-6 md:px-12 bg-surface-container-lowest relative">
+    <div class="max-w-7xl mx-auto text-center mb-28 reveal">
+        <p class="font-label text-primary text-xs uppercase tracking-[0.6em] mb-6">Craftsmanship</p>
+        <h2 class="font-headline text-4xl md:text-6xl text-on-surface font-bold">Your Path to the Wild</h2>
+    </div>
+    
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 relative">
+        <!-- Connector Line (Desktop) -->
+        <div class="hidden lg:block absolute top-[60px] left-[15%] w-[70%] h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent z-0"></div>
+        
+        <div class="relative z-10 flex flex-col items-center text-center reveal">
+            <div class="w-28 h-28 rounded-full bg-surface-container flex items-center justify-center mb-10 border border-primary/20 shadow-2xl group hover:border-primary/60 transition-all duration-500">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform duration-500">edit_note</span>
+            </div>
+            <p class="text-primary/40 font-label text-[10px] tracking-widest mb-2">01</p>
+            <h4 class="font-headline text-2xl mb-4 text-on-surface">Share Goals</h4>
+            <p class="text-on-surface-variant/70 text-sm leading-relaxed max-w-[200px]">Tell us about your photographic ambitions and desired encounters.</p>
+        </div>
+        
+        <div class="relative z-10 flex flex-col items-center text-center reveal" style="transition-delay: 0.1s">
+            <div class="w-28 h-28 rounded-full bg-surface-container flex items-center justify-center mb-10 border border-primary/20 shadow-2xl group hover:border-primary/60 transition-all duration-500">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform duration-500">architecture</span>
+            </div>
+            <p class="text-primary/40 font-label text-[10px] tracking-widest mb-2">02</p>
+            <h4 class="font-headline text-2xl mb-4 text-on-surface">Expert Design</h4>
+            <p class="text-on-surface-variant/70 text-sm leading-relaxed max-w-[200px]">Our specialists map out logistics, timing, and seasonal sweet spots.</p>
+        </div>
+        
+        <div class="relative z-10 flex flex-col items-center text-center reveal" style="transition-delay: 0.2s">
+            <div class="w-28 h-28 rounded-full bg-surface-container flex items-center justify-center mb-10 border border-primary/20 shadow-2xl group hover:border-primary/60 transition-all duration-500">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform duration-500">currency_exchange</span>
+            </div>
+            <p class="text-primary/40 font-label text-[10px] tracking-widest mb-2">03</p>
+            <h4 class="font-headline text-2xl mb-4 text-on-surface">Investment</h4>
+            <p class="text-on-surface-variant/70 text-sm leading-relaxed max-w-[200px]">A transparent, all-inclusive blueprint for your expedition.</p>
+        </div>
+        
+        <div class="relative z-10 flex flex-col items-center text-center reveal" style="transition-delay: 0.3s">
+            <div class="w-28 h-28 rounded-full bg-surface-container flex items-center justify-center mb-10 border border-primary/20 shadow-2xl group hover:border-primary/60 transition-all duration-500">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform duration-500">verified</span>
+            </div>
+            <p class="text-primary/40 font-label text-[10px] tracking-widest mb-2">04</p>
+            <h4 class="font-headline text-2xl mb-4 text-on-surface">Refine & Confirm</h4>
+            <p class="text-on-surface-variant/70 text-sm leading-relaxed max-w-[200px]">We polish every detail until it matches your vision of perfection.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Expedition Architecture -->
+<section class="py-40 px-6 md:px-12 bg-surface-container-lowest relative overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-24 relative z-10">
+        <div class="lg:w-1/2 reveal">
+            <p class="font-label text-primary text-xs uppercase tracking-[0.5em] mb-8 font-extrabold italic">Meticulous Engineering</p>
+            <h2 class="font-headline text-4xl md:text-6xl text-on-surface font-bold leading-tight mb-12">The Blueprint <br/>of Discovery</h2>
+            
+            <div class="grid grid-cols-1 gap-12">
+                <div class="group">
+                    <div class="flex items-center gap-6 mb-4">
+                        <span class="text-primary font-headline text-3xl italic opacity-40 group-hover:opacity-100 transition-all">01.</span>
+                        <h4 class="font-headline text-2xl text-on-surface group-hover:text-primary transition-colors">Strategic Scouting</h4>
+                    </div>
+                    <p class="text-on-surface-variant/70 text-lg leading-relaxed pl-14">
+                        We don't just pick a spot; we analyze cross-seasonal animal migration data and local pride behaviors to ensure you're exactly where the action happens.
+                    </p>
+                </div>
+                
+                <div class="group">
+                    <div class="flex items-center gap-6 mb-4">
+                        <span class="text-primary font-headline text-3xl italic opacity-40 group-hover:opacity-100 transition-all">02.</span>
+                        <h4 class="font-headline text-2xl text-on-surface group-hover:text-primary transition-colors">Bespoke Logistics</h4>
+                    </div>
+                    <p class="text-on-surface-variant/70 text-lg leading-relaxed pl-14">
+                        From aircraft synchronization to custom open-sided vehicles with 360° photographic mounts, we handle the friction so you can focus on the lens.
+                    </p>
+                </div>
+
+                <div class="group">
+                    <div class="flex items-center gap-6 mb-4">
+                        <span class="text-primary font-headline text-3xl italic opacity-40 group-hover:opacity-100 transition-all">03.</span>
+                        <h4 class="font-headline text-2xl text-on-surface group-hover:text-primary transition-colors">Cinematic Execution</h4>
+                    </div>
+                    <p class="text-on-surface-variant/70 text-lg leading-relaxed pl-14">
+                        Our guides aren't just naturalists; they are cinematic strategists who understand light, positioning, and the patience required for a masterpiece.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:w-1/2 aspect-[4/5] relative reveal" style="transition-delay: 0.2s">
+            <div class="absolute -inset-4 border border-primary/20 rounded-3xl -z-10 translate-x-8 translate-y-8"></div>
+            <div class="relative w-full h-full rounded-2xl overflow-hidden bento-card shadow-3xl group">
+                <img alt="The Expedition Kit" class="w-full h-full object-cover brightness-[0.7] group-hover:scale-110 transition-transform duration-[4s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyRlRMFG_CpXxFOAgUB4p27FN2QO8zbQKS3d-pKn059iOQLAH8ocvsx0M9CuMvdF44TElJxs1NDsXp7f-EWHadHVET0Cs49m-IGVH1fuFqKhw9hBJleFEbNhMK7VZCLvovYlBP9g-uWzm1dJExINKzuj_2O-JZp547Nxv0jDoXg5-GVK8FhexTjcC-U6mwFBLuBcFt1LuQ3Lj-1_wctfI2HmtRP6KEQUjOAelmZwVxkh9v6fJaxzD_t5tjTyUxjyWnrtehuKRUw1s"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                <div class="absolute bottom-10 left-10 right-10">
+                    <p class="text-primary font-label text-[10px] uppercase tracking-[0.5em] font-bold mb-4">Phase Insight</p>
+                    <p class="font-headline text-2xl text-white italic font-bold">"Precision is the difference between a trip and an epic."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-32 px-6 md:px-12 bg-surface-container-highest relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img alt="Elephant Silhouette" class="w-full h-full object-cover opacity-20 brightness-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLbgByMfQ6FBinV6f2uMNN61J0dB-vgPnUCIn8t0x3vSw99bh1A2oeOsZcdpYElfe_iEX1LzuISzD_xXvi1ebTVuikSJVh34yiFw1QHXxvmL-apT5ek5WFTwBlBqJrQjFm_jQSf4gYA1iwscfHeNcEy0j3YqSIovQJElo9fdqPEEBmuZzVHD9KEmvETOCDDewRvRQlC-9ZXJCmQ1hHYWpW7Nm8E2gLGghOgbihUhC6VtL9JkzEdFUN2rM3ULyzD5Cau8Rhf_YAhw"/>
+    </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+        <h2 class="font-headline text-4xl md:text-7xl mb-10 text-on-surface font-bold">Heed the Call.</h2>
+        <p class="text-on-surface-variant text-xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            Your next great story begins with a single conversation. Let us design an expedition that will haunt your soul in the best way possible.
+        </p>
+        <button class="gold-gradient text-on-primary font-bold px-16 py-6 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all uppercase tracking-[0.3em] text-sm">
+            Begin the Journey
+        </button>
+    </div>
+</section>
+
+<!-- Inquiry FAB -->
+<div class="fixed bottom-12 right-6 md:right-12 z-50">
+    <button class="gold-gradient w-16 h-16 rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(243,190,88,0.3)] hover:scale-110 active:scale-90 transition-all animate-float">
+        <span class="material-symbols-outlined text-on-primary text-3xl" style="font-variation-settings: 'FILL' 1;">mail</span>
+    </button>
+</div>
+
+
+
+
+
+<!-- Footer -->
+<footer class="w-full py-24 bg-surface border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12">
+        <div class="text-primary font-headline text-2xl tracking-[0.4em] font-bold uppercase italic">WILDLENS RESERVE</div>
+        <div class="flex flex-wrap justify-center gap-12 text-[10px] font-label uppercase tracking-[0.4em] font-bold">
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="explore.html">Expeditions</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Conservation</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="index.html">Our Story</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Legal</a>
+        </div>
+        <div class="text-on-surface-variant/20 font-label text-[10px] uppercase tracking-[0.6em] text-center italic">
+            © 2024 THE CINEMATIC NATURALIST. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const options = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            nav.classList.add('py-4', 'bg-[#121412]/90');
+            nav.classList.remove('py-5', 'bg-[#121412]/60');
+        } else {
+            nav.classList.remove('py-4', 'bg-[#121412]/90');
+            nav.classList.add('py-5', 'bg-[#121412]/60');
+        }
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && menuClose && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

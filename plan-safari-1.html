@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Plan Your Journey | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .cinematic-overlay {
+            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.4), rgba(18, 20, 18, 0.95));
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .destination-card {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .destination-card:hover {
+            border-color: rgba(243, 190, 88, 0.4);
+            transform: translateY(-8px);
+        }
+        .glass-nav {
+            background: rgba(18, 20, 18, 0.6);
+            backdrop-filter: blur(24px);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f3be58; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
+
+<!-- Background Image -->
+<div class="fixed inset-0 z-0">
+    <img class="w-full h-full object-cover brightness-[0.4]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcrLRtR0wuvkpS5kTG0Feg-fbywn0Fa2J4UzE8j_EEJecYnKoUlruk2uqj1VJK0lmsbeqho_IH6WPalJJBch7jnBN-gUwmNjlHHL2lZSXALHcEcNc-6TMKupVkJcb4KU_HlVuDeS8S3cWu7ZVcyPkAxroAkfkuEzxyDkoQ_GUdlAfT1CKaF9ZSl38XjAFRpRwPdmjkFAm6pKfDj-evsJM6JNIf8zrMOITxTxFoJIgFWVB9y5zTs1mPVsy8rBkXEhqBX_3W0q-QVjY"/>
+    <div class="absolute inset-0 cinematic-overlay"></div>
+</div>
+
+<header class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl border-b border-white/5 flex justify-between items-center px-8 py-5 transition-all duration-500">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="flex items-center gap-4">
+        <a href="index.html" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors hidden md:block" aria-label="Exit">close</a>
+        <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center gap-10 p-12">
+    <button id="menu-close" class="absolute top-10 right-10 text-primary p-2">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    <div class="text-primary font-headline text-lg tracking-[0.4em] font-bold uppercase italic mb-8">WILDLENS</div>
+    <a href="index.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Home</a>
+    <a href="explore.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Explore</a>
+    <a href="gallery.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Gallery</a>
+    <a href="plan-safari-1.html" class="font-headline text-4xl text-primary font-bold italic">Plan Expedition</a>
+</div>
+
+<!-- Progress Bar -->
+<div class="fixed top-24 left-1/2 -translate-x-1/2 z-40 w-full max-w-sm px-6">
+    <div class="bg-surface-variant/40 backdrop-blur-3xl rounded-2xl p-4 border border-white/10 shadow-3xl">
+        <div class="flex justify-between items-center mb-3">
+            <span class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">Step 1 of 5</span>
+            <span class="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-extrabold italic">Destination</span>
+        </div>
+        <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+            <div class="h-full bg-primary w-1/5 shadow-[0_0_15px_rgba(243,190,88,0.5)]"></div>
+        </div>
+    </div>
+</div>
+
+<main class="flex-grow pt-48 pb-40 px-6 relative z-10">
+    <div class="max-w-4xl mx-auto text-center mb-20 reveal">
+        <h1 class="font-headline text-5xl md:text-7xl mb-8 tracking-tight font-bold">Where does your heart lead?</h1>
+        <p class="font-body text-on-surface-variant text-xl max-w-2xl mx-auto opacity-70 leading-relaxed font-light">
+            Select the landscape that calls to your soul. Every journey we craft is as unique as your own signature.
+        </p>
+    </div>
+
+    <!-- Asymmetric Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto mb-20">
+        
+        <!-- Kenya Card -->
+        <div class="md:col-span-2 group cursor-pointer relative overflow-hidden rounded-2xl bg-surface-container-low border border-outline-variant/30 destination-card h-[400px] reveal">
+            <img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-gy9TG-mowtS-VHmrqpKoNPtqeNYixrQ8x4JUUJOSzbyq402-aQJieSURlW-ES423PGCzjIgGDwOjdllW4aoQtkPlCLiEHu-nfRPGPDKUTDt0YTOnhJ-VrxdSAdPu7sXY1-SnGVQSPcq-ICQyFSdrRdylAG3VvME2chJxCpgTpQcANmqob9kMI_4R60HCFd7VAD4eBI4J0681zSjd1p6GJg4hQf-EnqQZNH4jqYaqYslPXBg9UwloMlg3YVGBcyTl97ArC44vdjU"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-black/10 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <span class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-3 block font-bold">East Africa</span>
+                <h3 class="font-headline text-4xl mb-3 font-bold text-white">Kenya</h3>
+                <p class="text-on-surface-variant text-base max-w-xs opacity-0 group-hover:opacity-100 transition-all duration-700">The theater of the Great Migration and ancestral Maasai lands.</p>
+            </div>
+            <div class="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
+                <span class="material-symbols-outlined text-primary text-3xl">arrow_forward</span>
+            </div>
+        </div>
+
+        <!-- Tanzania Card -->
+        <div class="md:col-span-2 group cursor-pointer relative overflow-hidden rounded-2xl bg-surface-container-low border border-outline-variant/30 destination-card h-[400px] reveal" style="transition-delay: 0.1s">
+            <img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY354YPhvL6wSRQUOQg-eTa3OOUHhz1b_SLnXOQBkztroMAJluPrN8kKk5tJbb4a4vKyzdd8_h5DG0oXfauhBi6WyAB0uyh9AcRENQt6yHmIMB6TqJBqLiz-r2iHsFpiMJE9zcyA78yb91LsFGl7DdiyPlQP_1VdpRFJeLxsWZCQU_cCTbqBeng2K4hUEf2OhCPrmZHjOr0ZyXwr3Xa6mKX6aBmLOz35JrgugDHJdESOcLl3h9V-BjW8oZ3i3D6DEK4GvPSOzSk1I"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-black/10 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <span class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-3 block font-bold">The Great Rift</span>
+                <h3 class="font-headline text-4xl mb-3 font-bold text-white">Tanzania</h3>
+                <p class="text-on-surface-variant text-base max-w-xs opacity-0 group-hover:opacity-100 transition-all duration-700">From the depths of Ngorongoro Crater to the peaks of Kilimanjaro.</p>
+            </div>
+            <div class="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
+                <span class="material-symbols-outlined text-primary text-3xl">arrow_forward</span>
+            </div>
+        </div>
+
+        <!-- Botswana Card -->
+        <div class="md:col-span-2 group cursor-pointer relative overflow-hidden rounded-2xl bg-surface-container-low border border-outline-variant/30 destination-card h-[400px] reveal">
+            <img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgNxoD0qalDEDRrZMxbC2XHI-ZsrHeYTJsaXsx7Ddl_lTGGbB8ReLozCXX9QNWXOQt31s3zhPTgex7TiF-xJTTUDlnNMNMrin9eZ03t64xcESb92jECbKTPw7UaDFdFgQXaQB0ZxV7sGSib7fknajxUpv8_3iF-F_3M3kbqHlFRz9uXEAwnfFg030Io3PUs8ffy764kS9O2pmVAL9f1VZVo7ePEiPvW4suF9YZ0Lv7fthr1AvszxF_2e5eulY5gx8dtXSMIKSJNok"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-black/10 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <span class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-3 block font-bold">Southern Africa</span>
+                <h3 class="font-headline text-4xl mb-3 font-bold text-white">Botswana</h3>
+                <p class="text-on-surface-variant text-base max-w-xs opacity-0 group-hover:opacity-100 transition-all duration-700">Pristine delta waters and the majesty of the Kalahari desert.</p>
+            </div>
+            <div class="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
+                <span class="material-symbols-outlined text-primary text-3xl">arrow_forward</span>
+            </div>
+        </div>
+
+        <!-- India Card -->
+        <div class="md:col-span-2 group cursor-pointer relative overflow-hidden rounded-2xl bg-surface-container-low border border-outline-variant/30 destination-card h-[400px] reveal" style="transition-delay: 0.1s">
+            <img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8d725_wqU60jn2UXB2DdRrovx74s9mYPZeGqwldUttJHXGu6oTycTtYFSxIxInevPC_dDD7EctZS76f_ALSEjvjw98O99LoGWsXNwotrCfhnq_qv6UFe4zr6JT-2qAp1gVd2HEyuqGp7_ANUwI1Rytn7D3b1T0iVfTSP5sHYm8M8AM11cqO1k3vV3459fAo8m8ndc_GEytnFRsXgmBPX3c_BoQ8olU09C7pl8mrilHYJIP01nHTJZv18c_D4_2BeWb3MdRWZ3pJk"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-black/10 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <span class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-3 block font-bold">Asian Wilderness</span>
+                <h3 class="font-headline text-3xl mb-3 font-bold text-white">India</h3>
+                <p class="text-on-surface-variant text-base max-w-xs opacity-0 group-hover:opacity-100 transition-all duration-700">The elusive tiger's kingdom and the vibrant heritage of Rajasthan.</p>
+            </div>
+            <div class="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
+                <span class="material-symbols-outlined text-primary text-3xl">arrow_forward</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Message -->
+    <div class="flex flex-col items-center gap-6 animate-pulse reveal">
+        <div class="flex items-center gap-4 bg-surface-container-high/40 backdrop-blur-3xl px-8 py-4 rounded-full border border-white/5">
+            <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+            <span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Your consultation is bespoke, not automated. We respond within 24-48 hours.</span>
+        </div>
+    </div>
+</main>
+
+<!-- Sticky Footer Action -->
+<footer class="fixed bottom-0 left-0 w-full bg-[#121412]/80 backdrop-blur-3xl px-8 py-8 flex items-center justify-center sm:justify-between z-50 border-t border-white/5 shadow-3xl">
+    <div class="hidden sm:flex items-center gap-4">
+        <span class="material-symbols-outlined text-on-surface-variant">info</span>
+        <p class="text-[10px] font-label text-on-surface-variant tracking-[0.3em] uppercase">Phase 01: Global Sanctuary Selection</p>
+    </div>
+    <div class="flex items-center gap-12">
+        <a href="index.html" class="text-on-surface-variant hover:text-red-400 font-label text-[10px] uppercase tracking-[0.4em] transition-colors font-bold">Exit Planner</a>
+        <a href="plan-safari-2.html" class="bg-gradient-to-r from-primary to-primary/80 text-on-primary px-16 py-4 rounded-full font-label text-[10px] uppercase tracking-[0.4em] font-extrabold shadow-[0_10px_40px_-5px_rgba(243,190,88,0.3)] hover:scale-105 active:scale-95 transition-all inline-block">
+            Continue Journey
+        </a>
+    </div>
+</footer>
+
+<script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+</script>
+
+<!-- Mobile/Tab Bottom Navigation removed -->
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && menuClose && mobileMenu) {
+        menuToggle.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+        menuClose.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+        });
+    }
+</script>

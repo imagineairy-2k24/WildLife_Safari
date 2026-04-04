@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Journey Timeline | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .golden-gradient {
+            background: linear-gradient(135deg, #f3be58 0%, #8c6500 100%);
+        }
+        .glass-panel {
+            background: rgba(41, 42, 40, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(243, 190, 88, 0.1);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .month-btn {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .month-btn:hover {
+            border-color: rgba(243, 190, 88, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            transform: scale(1.02);
+        }
+        .month-btn.selected {
+            background: rgba(243, 190, 88, 0.05);
+            border-color: #f3be58;
+            box-shadow: 0 0 20px rgba(243, 190, 88, 0.1);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl border-b border-white/5 flex justify-between items-center px-8 py-5 transition-all duration-500">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="flex items-center gap-6">
+        <a href="index.html" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Exit">close</a>
+    </div>
+</header>
+
+<main class="flex-grow pt-32 pb-40 px-6 max-w-6xl mx-auto w-full relative">
+    
+    <!-- Progress Indicator -->
+    <div class="mb-20 reveal">
+        <div class="flex items-center justify-between mb-4">
+            <span class="text-[10px] font-label uppercase tracking-[0.4em] text-on-surface-variant font-extrabold">Step 02 of 05</span>
+            <span class="text-[10px] font-label uppercase tracking-[0.4em] text-primary font-bold italic">Safari Timeline</span>
+        </div>
+        <div class="h-[1px] w-full bg-white/5 overflow-hidden">
+            <div class="h-full bg-primary w-2/5 shadow-[0_0_10px_rgba(243,190,88,0.5)]"></div>
+        </div>
+    </div>
+
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+        
+        <!-- Left: Selection Controls -->
+        <div class="lg:col-span-7 space-y-16">
+            <div class="space-y-6 reveal">
+                <h2 class="text-5xl md:text-6xl font-headline font-bold leading-tight text-on-surface tracking-tight">When shall the<br/><span class="italic text-primary font-normal">journey begin?</span></h2>
+                <p class="text-on-surface-variant font-body text-xl max-w-prose opacity-70 font-light leading-relaxed">
+                    The Serengeti changes its character with each moon. Select your preferred window of discovery.
+                </p>
+            </div>
+
+            <!-- Month Selection -->
+            <div class="space-y-8 reveal" style="transition-delay: 0.1s">
+                <h3 class="text-[10px] font-label uppercase tracking-[0.4em] text-primary font-extrabold">Preferred Months</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <button class="month-btn bg-surface-container-low p-6 rounded-2xl border border-white/5 group text-left">
+                        <span class="block text-[10px] font-label uppercase tracking-widest opacity-40 group-hover:opacity-100 mb-2">Jan - Feb</span>
+                        <span class="text-sm font-bold block">Calving Season</span>
+                    </button>
+                    <button class="month-btn selected bg-surface-container-low p-6 rounded-2xl border border-primary/50 group text-left relative overflow-hidden">
+                        <span class="block text-[10px] font-label uppercase tracking-widest text-primary mb-2">Mar - May</span>
+                        <span class="text-sm font-bold block">The Great Mig.</span>
+                        <div class="absolute top-3 right-3">
+                            <span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        </div>
+                    </button>
+                    <button class="month-btn bg-surface-container-low p-6 rounded-2xl border border-white/5 group text-left">
+                        <span class="block text-[10px] font-label uppercase tracking-widest opacity-40 group-hover:opacity-100 mb-2">Jun - Oct</span>
+                        <span class="text-sm font-bold block">River Crossings</span>
+                    </button>
+                    <button class="month-btn bg-surface-container-low p-6 rounded-2xl border border-white/5 group text-left">
+                        <span class="block text-[10px] font-label uppercase tracking-widest opacity-40 group-hover:opacity-100 mb-2">Nov - Dec</span>
+                        <span class="text-sm font-bold block">Short Rains</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Duration Selection -->
+            <div class="space-y-8 reveal" style="transition-delay: 0.2s">
+                <h3 class="text-[10px] font-label uppercase tracking-[0.4em] text-primary font-extrabold">Proposed Duration</h3>
+                <div class="flex flex-wrap gap-4">
+                    <button class="px-8 py-4 bg-surface-container-low rounded-full text-[10px] font-label uppercase tracking-[0.3em] font-bold border border-white/5 hover:border-primary/30 transition-all">4 - 6 Days</button>
+                    <button class="px-8 py-4 bg-primary text-on-primary rounded-full text-[10px] font-label uppercase tracking-[0.3em] font-extrabold border border-primary shadow-lg shadow-primary/20">7 - 10 Days</button>
+                    <button class="px-8 py-4 bg-surface-container-low rounded-full text-[10px] font-label uppercase tracking-[0.3em] font-bold border border-white/5 hover:border-primary/30 transition-all">11 - 14 Days</button>
+                    <button class="px-8 py-4 bg-surface-container-low rounded-full text-[10px] font-label uppercase tracking-[0.3em] font-bold border border-white/5 hover:border-primary/30 transition-all">15+ Days</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Editorial Image & Reassurance -->
+        <div class="lg:col-span-5 space-y-10 sticky top-32 reveal" style="transition-delay: 0.3s">
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden group shadow-3xl">
+                <img class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV9OTsoCraIXnYSZLH0qk4iTBrpZSAveVvIC64drnukOxcZCnJ6evoAFliu7SnXZGLu1mJiEVrWsVL5UvfNXa4HsCVelyOFJtArAEq70x2qHtVoRB2mGwZHMnvZLQPcK0EhTFDd4-2VmJSa1FXMs65af2A7drs2l_kP2WsfHnm0uKllY66nSW6vRKrSStSIVDqeBstwjumOrSyxcaip-X4MR3qBF3tlDmfP4JB6_kK4M9iKbVANZ_NMgBoI4KAWjmmP8JQn-zNuiY"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                
+                <div class="absolute bottom-8 left-8 right-8 glass-panel p-8 rounded-xl shadow-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        <h4 class="text-xs font-label uppercase tracking-[0.3em] font-bold text-on-surface">The Curator's Promise</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant font-light leading-relaxed">
+                        Dates are flexible. Your dedicated concierge will refine these windows based on live herd coordinates and exclusive lodge availability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Actions -->
+    <div class="mt-32 flex justify-between items-center border-t border-white/5 pt-12 reveal">
+        <a href="plan-safari-1.html" class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] uppercase tracking-[0.4em] font-bold group">
+            <span class="material-symbols-outlined text-base group-hover:-translate-x-2 transition-transform">arrow_back</span>
+            Back: Sanctuary
+        </a>
+        <a href="plan-safari-3.html" class="golden-gradient text-on-primary font-extrabold px-12 py-5 rounded-full flex items-center gap-4 transition-all hover:scale-105 active:scale-95 shadow-2xl inline-block">
+            <span class="font-label text-[10px] uppercase tracking-[0.4em]">Select Style</span>
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+    </div>
+
+</main>
+
+
+
+<script>
+    // Reveal script
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+</script>
+
+<!-- Mobile/Tab Bottom Navigation -->
+<nav class="md:hidden fixed bottom-6 left-6 right-6 z-[60] bg-[#121412]/80 backdrop-blur-3xl border border-white/10 rounded-full h-16 flex items-center justify-around px-8 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)]">
+    <a href="index.html" class="flex flex-col items-center gap-1 group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-[22px]">home</span>
+        <span class="text-[8px] uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Home</span>
+    </a>
+    <a href="explore.html" class="flex flex-col items-center gap-1 group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-[22px]">explore</span>
+        <span class="text-[8px] uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Explore</span>
+    </a>
+    <a href="gallery.html" class="flex flex-col items-center gap-1 group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-[22px]">gallery_thumbnail</span>
+        <span class="text-[8px] uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Gallery</span>
+    </a>
+    <a href="plan-safari-1.html" class="flex flex-col items-center gap-1 group">
+        <span class="material-symbols-outlined text-primary transition-colors text-[22px]">edit_calendar</span>
+        <span class="text-[8px] uppercase tracking-widest text-primary font-bold">Plan</span>
+    </a>
+</nav>
+
+</body>
+</html>

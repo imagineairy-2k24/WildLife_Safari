@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Inquiry Received | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&family=Birthstone&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "signature": ["Birthstone", "cursive"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.1), rgba(18, 20, 18, 0.95));
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, #f3be58, rgba(243, 190, 88, 0.1));
+        }
+        .glass-card {
+            background: rgba(41, 42, 40, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
+
+<!-- Header -->
+<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase mb-0.5">WILDLENS RESERVE</a>
+    <div class="hidden md:flex items-center gap-10">
+        <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
+        <a href="gallery.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Gallery</a>
+        <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
+        <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center gap-10 p-12">
+    <button id="menu-close" class="absolute top-10 right-10 text-primary p-2">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    <div class="text-primary font-headline text-lg tracking-[0.4em] font-bold uppercase italic mb-8">WILDLENS</div>
+    <a href="index.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Home</a>
+    <a href="explore.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Explore</a>
+    <a href="gallery.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Gallery</a>
+    <a href="plan-safari-1.html" class="font-headline text-4xl text-primary font-bold italic">Plan Expedition</a>
+</div>
+
+<main class="flex-grow">
+    <!-- Hero Header -->
+    <section class="relative h-[80vh] min-h-[600px] overflow-hidden">
+        <img alt="Elephant herd at sunset" class="w-full h-full object-cover brightness-[0.7] animate-[zoom_20s_infinite_alternate]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBleryJb3bEcP0egg2c-1XYcu96B7aVnNvx0D9yNrPqDc4JhBxttKiPzNQ0FNz1OOfvIN0Xv9NtnJnTpx7QIp_pyGJb3nxQdQCCSZQaw-gplf2ymFbBEuCi2YkVjELlchsLSoBo7k0ByAzun68izPXSEq1wifPdoXkV_xKYeVZNs35le0zyuINAYSaAvljiZpCTEL89QikOoK9YFCQqELh6YbJZyARvKpeOrAnAZx5fXhRjWecNkpcxeV76BE0ZxeJQcGTBSEJFCgY"/>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 flex items-center justify-center pt-32 reveal">
+            <div class="text-center px-6">
+                <span class="text-primary font-label text-[10px] uppercase tracking-[0.6em] mb-4 block font-bold">Inquiry Transmitted</span>
+                <h2 class="text-5xl md:text-8xl font-headline text-on-surface leading-tight tracking-tight font-bold">
+                    Your Safari Planning<br/>
+                    <span class="italic text-primary font-normal">Has Begun.</span>
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Content -->
+    <section class="px-8 relative z-10 pb-40 overflow-visible mt-20">
+        <div class="max-w-3xl mx-auto space-y-32">
+            
+            <div class="text-center space-y-6 reveal">
+                <p class="text-on-surface-variant text-xl leading-relaxed max-w-2xl mx-auto font-light opacity-80">
+                    Our lead specialist is now reviewing your goals. You can expect a tailored initial consultation within 24–48 hours as we coordinate with our field teams.
+                </p>
+                <div class="flex justify-center pt-8">
+                    <span class="w-[1px] h-20 bg-gradient-to-b from-primary to-transparent"></span>
+                </div>
+            </div>
+
+            <!-- Next Steps (Vertical Timeline) -->
+            <div class="space-y-12 reveal">
+                <div class="flex flex-col items-center text-center">
+                    <h3 class="text-[10px] font-label uppercase tracking-[0.4em] text-primary font-extrabold mb-4 italic">The Journey Ahead</h3>
+                    <h2 class="text-4xl md:text-5xl font-headline font-bold mb-16 text-on-surface">The Road to the Bush</h2>
+                </div>
+                
+                <div class="relative space-y-20 max-w-lg mx-auto">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-[3px] top-4 bottom-4 w-[1px] timeline-line"></div>
+                    
+                    <!-- Step 1 -->
+                    <div class="relative pl-12 group">
+                        <div class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-primary ring-8 ring-primary/10 transition-all group-hover:ring-primary/30"></div>
+                        <div class="space-y-2">
+                            <h4 class="font-headline text-2xl font-bold italic">Expert Review</h4>
+                            <p class="text-on-surface-variant text-base font-light leading-relaxed">Analyzing your preferences and seasonal wildlife patterns to find the perfect sanctuary pocket.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="relative pl-12 group">
+                        <div class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-outline-variant group-hover:bg-primary transition-colors"></div>
+                        <div class="space-y-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                            <h4 class="font-headline text-2xl font-bold italic">Route Optimization</h4>
+                            <p class="text-on-surface-variant text-base font-light leading-relaxed">Securing exclusive lodge units and mapping private air transfer logistics for total seclusion.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="relative pl-12 group">
+                        <div class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-outline-variant group-hover:bg-primary transition-colors"></div>
+                        <div class="space-y-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                            <h4 class="font-headline text-2xl font-bold italic">Bespoke Portfolio</h4>
+                            <p class="text-on-surface-variant text-base font-light leading-relaxed">A curated digital portfolio of your African expedition, including exact costs and guide details.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="relative pl-12 group">
+                        <div class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-outline-variant group-hover:bg-primary transition-colors"></div>
+                        <div class="space-y-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                            <h4 class="font-headline text-2xl font-bold italic">Personal Walkthrough</h4>
+                            <p class="text-on-surface-variant text-base font-light leading-relaxed">A private call with our Field Director to refine every granular detail of your itinerary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Founder Signature -->
+            <div class="py-20 border-y border-white/5 flex flex-col items-center text-center reveal">
+                <p class="italic text-on-surface-variant text-2xl font-light mb-10 max-w-md serif-voice">
+                    "We don't just book trips; we curate legacies of exploration."
+                </p>
+                <div class="font-signature text-6xl text-primary mb-4 tracking-wider">David Mwangi</div>
+                <p class="text-[9px] font-label uppercase tracking-[0.5em] text-primary/60 font-extrabold">Founder, WildLens Reserve</p>
+            </div>
+
+            <!-- Contact Support -->
+            <div class="space-y-12 reveal">
+                <div class="text-center space-y-4">
+                    <h4 class="font-headline text-3xl font-bold">Have immediate questions?</h4>
+                    <p class="text-lg text-on-surface-variant font-light opacity-60">Connect with our dedicated specialist team directly.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <a class="flex-1 flex items-center justify-center gap-4 py-6 rounded-2xl bg-surface-container-high border border-white/5 hover:border-primary/40 transition-all group" href="mailto:concierge@wildlens.com">
+                        <span class="material-symbols-outlined text-primary text-2xl">mail</span>
+                        <span class="text-[10px] font-label uppercase tracking-[0.4em] font-extrabold">Email Concierge</span>
+                    </a>
+                    <a class="flex-1 flex items-center justify-center gap-4 py-6 rounded-2xl bg-surface-container-high border border-white/5 hover:border-primary/40 transition-all group" href="#">
+                        <span class="material-symbols-outlined text-primary text-2xl">chat</span>
+                        <span class="text-[10px] font-label uppercase tracking-[0.4em] font-extrabold">WhatsApp Expert</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Return Home -->
+            <div class="text-center pt-20 reveal">
+                <a href="index.html" class="text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] uppercase tracking-[0.5em] font-extrabold border-b border-primary/20 pb-2 hover:border-primary">
+                    Return to the Reserve
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-24 bg-surface border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12">
+        <div class="text-primary font-headline text-2xl tracking-[0.4em] font-bold uppercase italic">WILDLENS RESERVE</div>
+        <div class="flex flex-wrap justify-center gap-12 text-[10px] font-label uppercase tracking-[0.4em] font-bold">
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="explore.html">Expeditions</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Conservation</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="index.html">Our Story</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Legal</a>
+        </div>
+        <div class="text-on-surface-variant/20 font-label text-[10px] uppercase tracking-[0.6em] text-center italic">
+            © 2024 THE CINEMATIC NATURALIST. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reveal script
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+</script>
+
+</body>
+</html>

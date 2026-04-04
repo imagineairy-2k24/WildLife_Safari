@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Expedition Team | WildLens Reserve</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .counter-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .counter-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(243, 190, 88, 0.2);
+            transform: translateY(-5px);
+        }
+        .glass-footer {
+            background: rgba(41, 42, 40, 0.8);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl border-b border-white/5 flex justify-between items-center px-8 py-5 transition-all duration-500">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="flex items-center gap-6">
+        <a href="index.html" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Exit">close</a>
+    </div>
+</header>
+
+<main class="flex-grow pt-32 pb-48 px-6 max-w-6xl mx-auto w-full relative">
+    
+    <!-- Progress Indicator -->
+    <div class="mb-20 reveal">
+        <div class="flex items-center justify-between mb-4">
+            <span class="text-[10px] font-label uppercase tracking-[0.4em] text-on-surface-variant font-extrabold">Step 03 of 05</span>
+            <span class="text-[10px] font-label uppercase tracking-[0.4em] text-primary font-bold italic">The Expedition Team</span>
+        </div>
+        <div class="h-[1px] w-full bg-white/5 overflow-hidden">
+            <div class="h-full bg-primary w-3/5 shadow-[0_0_10px_rgba(243,190,88,0.5)]"></div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center mb-24">
+        <div class="lg:col-span-7 space-y-8 reveal">
+            <h1 class="text-5xl md:text-7xl font-headline font-bold leading-tight tracking-tight">
+                Who will witness the <br/><span class="italic text-primary font-normal">untamed?</span>
+            </h1>
+            <p class="text-on-surface-variant text-xl max-w-md leading-relaxed font-light opacity-70">
+                Our private charters and exclusive lodges are tailored to your party, ensuring intimate encounters with the wild.
+            </p>
+        </div>
+        <div class="hidden lg:block lg:col-span-5 reveal" style="transition-delay: 0.1s">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden border border-white/5 relative group shadow-3xl">
+                <img class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8BaLgbPvyLU3v1kwjMSHtGYTXNS7hyVjqb2z1a4u79kIvL5SQHe-VYCFQgeiTdX2rgiAfX-jXE3MJc4neS1nAOZnYcIYCNgTe715rSfuwWnB7qpf3opGHn4sOW1aDob0nI68L8ehI4Nt_K-8rQHEyGzUrBt95tQxdgvvofvV4HhmHKaYhQuMJGUAhd5N2CNVMvSFEHdM3DdUbDOVR1ybzTOCKXLx6zW3IjbsBCSLC7ZNTeonLiacgxGjSQ-VkDQ1dHJp2PNApXf8"/>
+                <div class="absolute inset-x-8 bottom-8 p-6 bg-black/40 backdrop-blur-xl rounded-xl border border-white/10">
+                    <p class="text-white text-[10px] items-center gap-3 flex font-label uppercase tracking-widest font-bold">
+                        <span class="material-symbols-outlined text-primary text-base">privacy_tip</span>
+                        Private Seating Guaranteed
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Selectors -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <!-- Adults Selection -->
+        <div class="counter-card group bg-surface-container-low p-10 rounded-2xl border border-white/5 reveal">
+            <div class="flex justify-between items-start mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline italic">Adults</h3>
+                    <span class="text-[10px] uppercase tracking-[0.4em] text-on-surface-variant font-extrabold">Ages 12+</span>
+                </div>
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors">person</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-all active:scale-90 border border-white/5">
+                    <span class="material-symbols-outlined font-bold">remove</span>
+                </button>
+                <div class="flex flex-col items-center">
+                    <span class="text-7xl font-bold text-primary font-headline" id="adultCount">02</span>
+                </div>
+                <button class="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-all active:scale-90 border border-white/5">
+                    <span class="material-symbols-outlined font-bold">add</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Kids Selection -->
+        <div class="counter-card group bg-surface-container-low p-10 rounded-2xl border border-white/5 reveal" style="transition-delay: 0.1s">
+            <div class="flex justify-between items-start mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline italic">Children</h3>
+                    <span class="text-[10px] uppercase tracking-[0.4em] text-on-surface-variant font-extrabold">Ages 3 - 11</span>
+                </div>
+                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                    <span class="material-symbols-outlined text-secondary/40 group-hover:text-secondary transition-colors">child_care</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface/40 hover:bg-secondary hover:text-on-secondary transition-all active:scale-90 border border-white/5 opacity-40 hover:opacity-100">
+                    <span class="material-symbols-outlined font-bold">remove</span>
+                </button>
+                <div class="flex flex-col items-center">
+                    <span class="text-7xl font-bold text-on-surface-variant font-headline" id="kidCount">00</span>
+                </div>
+                <button class="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-secondary hover:text-on-secondary transition-all active:scale-90 border border-white/5">
+                    <span class="material-symbols-outlined font-bold">add</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes & Features -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-surface-container-lowest p-10 rounded-2xl border border-white/5 reveal">
+        <div class="flex gap-6 items-start">
+            <div class="bg-primary/10 p-3 rounded-full">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+            </div>
+            <div>
+                <p class="text-base font-bold text-on-surface mb-2">Junior Ranger Program</p>
+                <p class="text-sm text-on-surface-variant font-light leading-relaxed">Children 6+ are eligible for tracking workshops and interactive conservation sessions with our naturalists.</p>
+            </div>
+        </div>
+        <div class="flex gap-6 items-start">
+            <div class="bg-secondary/10 p-3 rounded-full">
+                <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+            </div>
+            <div>
+                <p class="text-base font-bold text-on-surface mb-2">Planning for Infants?</p>
+                <p class="text-sm text-on-surface-variant font-light leading-relaxed">For guests under 3, please contact our concierge to arrange specialized care facilities and logistics.</p>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- Sticky Action Bar -->
+<footer class="fixed bottom-0 left-0 w-full z-50 glass-footer px-8 py-8">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <div class="hidden sm:block">
+            <p class="text-[10px] font-label uppercase tracking-[0.4em] text-on-surface-variant font-extrabold mb-1">Estimated Party Size</p>
+            <p class="font-headline italic text-2xl text-primary font-bold">2 Expeditionists</p>
+        </div>
+        <div class="flex items-center gap-10 w-full sm:w-auto">
+            <a href="plan-safari-2.html" class="text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] uppercase tracking-[0.4em] font-extrabold group">
+                Previous Step
+            </a>
+            <a href="plan-safari-4.html" class="bg-gradient-to-r from-primary to-primary/80 text-on-primary px-16 py-5 rounded-full font-label text-[10px] uppercase tracking-[0.4em] font-extrabold shadow-2xl hover:scale-105 active:scale-95 transition-all flex-grow sm:flex-grow-0 inline-block text-center">
+                Continue to Style
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reveal script
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+</script>
+
+</body>
+</html>

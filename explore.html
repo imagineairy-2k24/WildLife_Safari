@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Explore Destinations | WildLens Reserve</title>
+    <meta name="description" content="Discover the world's most pristine wildlife sanctuaries. Curated expeditions to Maasai Mara, Serengeti, Okavango Delta, and Kaziranga.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#9b8f7e",
+                        "background": "#121412",
+                        "primary": "#f3be58",
+                        "on-primary": "#412d00",
+                        "surface": "#121412",
+                        "surface-bright": "#383a37",
+                        "surface-container-lowest": "#0d0f0d",
+                        "surface-container-low": "#1a1c1a",
+                        "surface-container": "#1e201e",
+                        "surface-container-high": "#292a28",
+                        "surface-container-highest": "#333533",
+                        "on-surface": "#e2e3df",
+                        "on-surface-variant": "#d2c5b1",
+                        "outline-variant": "rgba(78, 70, 55, 0.25)",
+                        "on-background": "#e2e3df",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in-out': 'zoomInOut 20s infinite alternate ease-in-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        zoomInOut: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.1), rgba(18, 20, 18, 0.95));
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3be58 0%, #a67c00 100%);
+        }
+        .glass-nav {
+            background: rgba(18, 20, 18, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(243, 190, 88, 0.1);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .bento-card {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.5);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121412; }
+        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f3be58; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary antialiased">
+
+<!-- Header -->
+<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+    <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
+    <div class="hidden md:flex items-center gap-10">
+        <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
+        <a href="gallery.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Gallery</a>
+        <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
+        <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center gap-10 p-12">
+    <button id="menu-close" class="absolute top-10 right-10 text-primary p-2">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    
+    <div class="text-primary font-headline text-lg tracking-[0.4em] font-bold uppercase italic mb-8">WILDLENS</div>
+    
+    <a href="index.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Home</a>
+    <a href="explore.html" class="font-headline text-4xl text-primary transition-all font-bold italic">Explore</a>
+    <a href="gallery.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Gallery</a>
+    <a href="plan-safari-1.html" class="font-headline text-4xl text-on-surface hover:text-primary transition-all font-bold italic">Plan Expedition</a>
+    
+    <div class="mt-20 flex flex-col items-center gap-6">
+        <p class="font-label text-on-surface-variant/40 text-[10px] uppercase tracking-widest font-bold">Contact Mission Control</p>
+        <p class="font-label text-primary text-xl uppercase tracking-widest font-bold">+254 800 555 0123</p>
+    </div>
+</div>
+
+<main class="pt-32 pb-32">
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 md:px-12 mb-20">
+        <div class="max-w-4xl reveal">
+            <h1 class="font-headline text-5xl md:text-8xl mb-8 text-on-surface leading-tight font-bold">
+                The Great Reserves:<br/>
+                <span class="italic text-primary font-normal tracking-wide">Curated for the Extraordinary.</span>
+            </h1>
+            <p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl opacity-70 leading-relaxed font-light">
+                Explore the world's last wild sanctuaries. From the flooded plains of the Okavango to the misty peaks of Kaziranga, we provide access to the pulse of the planet.
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Bar (Sticky) -->
+    <nav class="sticky top-20 z-40 bg-background/80 backdrop-blur-xl px-6 md:px-12 py-6 mb-20 border-y border-outline-variant/10 reveal" style="transition-delay: 0.2s">
+        <div class="flex flex-wrap items-center gap-12 max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 cursor-pointer group">
+                <span class="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-bold">Species Focus</span>
+                <span class="material-symbols-outlined text-sm text-primary group-hover:rotate-180 transition-transform duration-500">expand_more</span>
+            </div>
+            <div class="flex items-center gap-4 cursor-pointer group">
+                <span class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant group-hover:text-primary transition-colors font-bold">Season</span>
+                <span class="material-symbols-outlined text-sm text-on-surface-variant group-hover:text-primary transition-colors group-hover:rotate-180 transition-transform duration-500">expand_more</span>
+            </div>
+            <div class="flex items-center gap-4 cursor-pointer group">
+                <span class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant group-hover:text-primary transition-colors font-bold">Style</span>
+                <span class="material-symbols-outlined text-sm text-on-surface-variant group-hover:text-primary transition-colors group-hover:rotate-180 transition-transform duration-500">expand_more</span>
+            </div>
+            <div class="ml-auto hidden md:flex items-center gap-4 text-on-surface-variant/40">
+                <span class="text-[10px] font-label uppercase tracking-[0.3em]">Displaying 04 Destinations</span>
+                <div class="w-8 h-[1px] bg-outline-variant"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Destination Gallery (Bento Grid) -->
+    <section class="max-w-[1600px] mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+            
+            <!-- Destination 1: Maasai Mara -->
+            <div class="group relative flex flex-col aspect-[4/5] bg-surface-container-low overflow-hidden rounded-2xl bento-card reveal">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <img alt="Maasai Mara" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ5kJlV3_A3KPDxUs30qH6dtpxkalpGtcu6z-HlpSdVDwS21w5-rH0_g7tW4Cp_wypzmPxyCuDvmioBW1QavG6N0qDH6Hhj5StZtIgJqyP4HYjy5Lk8D958rravJDf_OfSnTjLPAP2ww7istSxw83M_vL6mp6xCnKmFLyHNzMo-mFxaUkHwdbfEXYD_awTgyo0NOD_qHRr1HeSyGpvu6Tr8O4iixQr2nrVWa_qeoYgriM4awPrhTg-gtOhCgP2uvPpp_N8wRG2umA"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-95"></div>
+                </div>
+                <div class="relative z-10 mt-auto p-12 md:p-16">
+                    <span class="font-label text-xs tracking-[0.4em] text-primary uppercase mb-4 block opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">Kenya</span>
+                    <h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface font-bold">Maasai Mara</h2>
+                    <div class="flex flex-col gap-8 border-l border-primary/20 pl-8 opacity-0 transform translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Best Season</p>
+                                <p class="font-body text-sm text-on-surface font-medium">July to October</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Signature</p>
+                                <p class="font-body text-sm text-primary font-bold">Great Migration</p>
+                            </div>
+                        </div>
+                        <a href="safari-detail.html" class="w-max p-0 text-on-surface font-label text-[10px] uppercase tracking-[0.4em] border-b border-white/20 hover:border-primary transition-all pb-2 text-left">Explore this reserve</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destination 2: Serengeti -->
+            <div class="group relative flex flex-col aspect-[4/5] bg-surface-container-low overflow-hidden rounded-2xl bento-card md:mt-32 reveal" style="transition-delay: 0.1s">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <img alt="Serengeti" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWYZukuElRAOd0CI3_rKBmDuxWhiaHmKU2tyU1HUmj5TQu6DidUaJIwu1NHGpQMzxjGFhYHRYjgJAsGS9Ok8was40Z4CwX6lhXE_bWF81YsBvnoPJpkT6KN-0YW5JsmAL65dsthmbiFURa4CF5l2jiSNx90HCjcGzAVo1xtz-y6KG17YFr93O2TWH0vIFQTUVZBa-iopSFWrK7HWM7BZc7Tyc7ZtK_0nBegGRCrIddXMWxPgse-tZpuuYyaKP5s4oC4CD2RXwVsgE"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-95"></div>
+                </div>
+                <div class="relative z-10 mt-auto p-12 md:p-16">
+                    <span class="font-label text-xs tracking-[0.4em] text-primary uppercase mb-4 block opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">Tanzania</span>
+                    <h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface font-bold">Serengeti</h2>
+                    <div class="flex flex-col gap-8 border-l border-primary/20 pl-8 opacity-0 transform translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Best Season</p>
+                                <p class="font-body text-sm text-on-surface font-medium">January to March</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Signature</p>
+                                <p class="font-body text-sm text-primary font-bold">Predator Dramas</p>
+                            </div>
+                        </div>
+                        <a href="safari-detail.html" class="w-max p-0 text-on-surface font-label text-[10px] uppercase tracking-[0.4em] border-b border-white/20 hover:border-primary transition-all pb-2 text-left">Explore this reserve</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destination 3: Okavango Delta -->
+            <div class="group relative flex flex-col aspect-[4/5] bg-surface-container-low overflow-hidden rounded-2xl bento-card lg:-mt-32 reveal">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <img alt="Okavango Delta" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7LfGHmnMozxeNUG2tZY4vqTaB4z7trD7QpiW47Bw61uy6z--p_il8ljOIt8c9hDVXaupXnQROhci8cJiK5A2fX1ho3HXdB4Z9gEsHof1hNbgdcqIh2cpGSk4whCpmmP4C5ZZbzhCj67tI3unaf8mGltvrn8KQjfNoK-50TO7x2nMSLci-lQtEaLsAKVP4VLgr8E5vILSg5VZ4tN-JAGaMo_FcwfkjWM8VTa04e3FgRa8XOLQ2lfqkTEkB0ojPzLBJbY2Cj4jiseU"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-95"></div>
+                </div>
+                <div class="relative z-10 mt-auto p-12 md:p-16">
+                    <span class="font-label text-xs tracking-[0.4em] text-primary uppercase mb-4 block opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">Botswana</span>
+                    <h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface font-bold">Okavango Delta</h2>
+                    <div class="flex flex-col gap-8 border-l border-primary/20 pl-8 opacity-0 transform translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Best Season</p>
+                                <p class="font-body text-sm text-on-surface font-medium">May to August</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Signature</p>
+                                <p class="font-body text-sm text-primary font-bold">Mokoro Safaris</p>
+                            </div>
+                        </div>
+                        <button class="w-max p-0 text-on-surface font-label text-[10px] uppercase tracking-[0.4em] border-b border-white/20 hover:border-primary transition-all pb-2">Explore this reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destination 4: Kaziranga -->
+            <div class="group relative flex flex-col aspect-[4/5] bg-surface-container-low overflow-hidden rounded-2xl bento-card reveal" style="transition-delay: 0.1s">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <img alt="Kaziranga" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQRBWCx0DX0AuWJTS56JvyHjvLEfXHdWmynn7CjImVd5mRTDkhcBvTTQrqix4vyT7iIBi-CctTNFQMnPkm2Yu2A2LqK6F1inZ7WmonoHvpC9eL3QWJZ6bbokCjXxYCgGcUrKVqpFVwlktqagTLakSVK4o1BqbbJqFWqIc4omQDBPnCrxx76vVobh5wTUu0aILMRBMmuRnaMZcGZPC4wiBZpMAk4FWg9bTLNIeRd04aMbH7LxuP0R-LTvLUxZ_gQ9ypvNcfpxCe5mI"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-95"></div>
+                </div>
+                <div class="relative z-10 mt-auto p-12 md:p-16">
+                    <span class="font-label text-xs tracking-[0.4em] text-primary uppercase mb-4 block opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">India</span>
+                    <h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface font-bold">Kaziranga</h2>
+                    <div class="flex flex-col gap-8 border-l border-primary/20 pl-8 opacity-0 transform translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Best Season</p>
+                                <p class="font-body text-sm text-on-surface font-medium">November to April</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-label uppercase text-on-surface-variant/40 tracking-[0.3em] mb-2">Signature</p>
+                                <p class="font-body text-sm text-primary font-bold">Indian Rhino</p>
+                            </div>
+                        </div>
+                        <button class="w-max p-0 text-on-surface font-label text-[10px] uppercase tracking-[0.4em] border-b border-white/20 hover:border-primary transition-all pb-2">Explore this reserve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Detail Section -->
+    <section class="py-40 px-6 md:px-12 bg-surface-container-lowest mt-40 overflow-hidden relative">
+        <div class="absolute -left-20 top-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+        
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-24 items-center">
+            <div class="w-full lg:w-1/2 reveal">
+                <div class="relative group">
+                    <img alt="Luxury Safari Experience" class="w-full h-[700px] object-cover rounded-2xl shadow-3xl grayscale hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi_JCuqrYPBnP3Fm-yyiX_cuhO5_oxbkqJrg6GQbgLcYEvQD2OArujVbOkYwosPrgX5-kJdCAOIXpjk0Pb5eKymlnaskfNWV4GTiHiCfFEM-0w4Mt7epnuwtgVogtKD9QQBbTXBEzu-BoHBAo8-UIzCGK0Ig_0NfLzC7x5taJ11GpvxElj4L4kS8UPcQF6emOSKeCZbgNyMwqY4YU8Q0r8bBdg-WkaGzPx5s8-_u-2RsDpL5hJ0_vr2RPiHETLJyw98jfGxOmr7vk"/>
+                    <div class="absolute inset-0 border-[20px] border-background m-8 opacity-20 pointer-events-none"></div>
+                </div>
+            </div>
+            <div class="w-full lg:w-1/2 space-y-12 reveal" style="transition-delay: 0.2s">
+                <p class="font-label text-xs tracking-[0.5em] text-primary uppercase font-bold">The Human Element</p>
+                <h2 class="font-headline text-5xl md:text-7xl leading-[1.1] text-on-surface font-bold">The Art of the <br/><span class="italic text-primary font-normal">Naturalist</span> Guide.</h2>
+                <div class="space-y-8">
+                    <p class="font-body text-2xl text-on-surface-variant leading-relaxed italic font-light serif-quote">
+                        "Luxury isn't in the thread count; it's in the depth of knowledge. Our guides don't just find wildlife—they interpret the silence of the bush."
+                    </p>
+                    <p class="text-on-surface-variant/60 text-lg leading-relaxed max-w-xl">
+                        Every WildLens expedition is accompanied by a lead specialist who brings decades of field experience, biological expertise, and artistic vision to your journey.
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <button class="gold-gradient text-on-primary px-12 py-5 rounded-full font-label text-[10px] uppercase tracking-[0.3em] font-extrabold hover:scale-105 transition-all shadow-2xl">
+                        Our Heritage of Expertise
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-24 bg-surface border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12">
+        <div class="text-primary font-headline text-2xl tracking-[0.4em] font-bold uppercase italic">WILDLENS RESERVE</div>
+        <div class="flex flex-wrap justify-center gap-12 text-[10px] font-label uppercase tracking-[0.4em] font-bold">
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="explore.html">Expeditions</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Conservation</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="index.html">Our Story</a>
+            <a class="text-on-surface-variant/40 hover:text-primary transition-all" href="#">Legal</a>
+        </div>
+        <div class="text-on-surface-variant/20 font-label text-[10px] uppercase tracking-[0.6em] text-center italic">
+            © 2024 THE CINEMATIC NATURALIST. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            nav.classList.add('bg-[#121412]/95', 'py-4');
+            nav.classList.remove('py-5');
+        } else {
+            nav.classList.remove('bg-[#121412]/95', 'py-4');
+            nav.classList.add('py-5');
+        }
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && menuClose && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+    }
+</script>
+
+<!-- Mobile/Tab Bottom Navigation removed -->
+
+</body>
+</html>
