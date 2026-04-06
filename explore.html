@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
+    <link rel="stylesheet" href="theme.css"/>
+    <script src="theme.js"></script>
+    
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -20,21 +23,21 @@
             theme: {
                 extend: {
                     colors: {
-                        "outline": "#9b8f7e",
-                        "background": "#121412",
-                        "primary": "#f3be58",
-                        "on-primary": "#412d00",
-                        "surface": "#121412",
-                        "surface-bright": "#383a37",
-                        "surface-container-lowest": "#0d0f0d",
-                        "surface-container-low": "#1a1c1a",
-                        "surface-container": "#1e201e",
-                        "surface-container-high": "#292a28",
-                        "surface-container-highest": "#333533",
-                        "on-surface": "#e2e3df",
-                        "on-surface-variant": "#d2c5b1",
-                        "outline-variant": "rgba(78, 70, 55, 0.25)",
-                        "on-background": "#e2e3df",
+                        "outline": "rgb(var(--outline) / <alpha-value>)",
+                        "background": "rgb(var(--background) / <alpha-value>)",
+                        "primary": "rgb(var(--primary) / <alpha-value>)",
+                        "on-primary": "rgb(var(--on-primary) / <alpha-value>)",
+                        "surface": "rgb(var(--surface) / <alpha-value>)",
+                        "surface-bright": "rgb(var(--surface-bright) / <alpha-value>)",
+                        "surface-container-lowest": "rgb(var(--surface-container-lowest) / <alpha-value>)",
+                        "surface-container-low": "rgb(var(--surface-container-low) / <alpha-value>)",
+                        "surface-container": "rgb(var(--surface-container) / <alpha-value>)",
+                        "surface-container-high": "rgb(var(--surface-container-high) / <alpha-value>)",
+                        "surface-container-highest": "rgb(var(--surface-container-highest) / <alpha-value>)",
+                        "on-surface": "rgb(var(--on-surface) / <alpha-value>)",
+                        "on-surface-variant": "rgb(var(--on-surface-variant) / <alpha-value>)",
+                        "outline-variant": "rgb(var(--outline-variant) / <alpha-value>)",
+                        "on-background": "rgb(var(--on-background) / <alpha-value>)",
                     },
                     borderRadius: {
                         "DEFAULT": "0.5rem",
@@ -70,15 +73,15 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
         .hero-gradient {
-            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.1), rgba(18, 20, 18, 0.95));
+            background: linear-gradient(to bottom, rgb(var(--background) / 0.1), rgb(var(--background) / 0.95));
         }
         .gold-gradient {
-            background: linear-gradient(135deg, #f3be58 0%, #a67c00 100%);
+            background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--gold-gradient-end)) 100%);
         }
         .glass-nav {
-            background: rgba(18, 20, 18, 0.6);
+            background: rgb(var(--background) / 0.6);
             backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(243, 190, 88, 0.1);
+            border-bottom: 1px solid rgb(var(--glass-border) / 0.1);
         }
         .reveal {
             opacity: 0;
@@ -97,15 +100,15 @@
             box-shadow: 0 30px 60px -12px rgba(0,0,0,0.5);
         }
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #121412; }
-        ::-webkit-scrollbar-thumb { background: #333533; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #f3be58; }
+        ::-webkit-scrollbar-track { background: rgb(var(--background)); }
+        ::-webkit-scrollbar-thumb { background: rgb(var(--surface-container-highest)); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgb(var(--primary)); }
     </style>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary antialiased">
 
 <!-- Header -->
-<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+<nav class="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
     <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
     <div class="hidden md:flex items-center gap-10">
         <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
@@ -113,6 +116,7 @@
         <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
     </div>
     <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" aria-label="Toggle theme">dark_mode</button>
         <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
         <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
             <span class="material-symbols-outlined text-2xl">menu</span>
@@ -347,10 +351,10 @@
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('navbar');
         if (window.scrollY > 50) {
-            nav.classList.add('bg-[#121412]/95', 'py-4');
+            nav.classList.add('bg-background/95', 'py-4');
             nav.classList.remove('py-5');
         } else {
-            nav.classList.remove('bg-[#121412]/95', 'py-4');
+            nav.classList.remove('bg-background/95', 'py-4');
             nav.classList.add('py-5');
         }
     });

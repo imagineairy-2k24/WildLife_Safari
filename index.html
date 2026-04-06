@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="theme.css"/>
+    <script src="theme.js"></script>
     
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -20,21 +22,21 @@
             theme: {
                 extend: {
                     colors: {
-                        "outline": "#9b8f7e",
-                        "background": "#121412",
-                        "primary": "#f3be58",
-                        "on-primary": "#412d00",
-                        "surface": "#121412",
-                        "surface-bright": "#383a37",
-                        "surface-container-lowest": "#0d0f0d",
-                        "surface-container-low": "#1a1c1a",
-                        "surface-container": "#1e201e",
-                        "surface-container-high": "#292a28",
-                        "surface-container-highest": "#333533",
-                        "on-surface": "#e2e3df",
-                        "on-surface-variant": "#d2c5b1",
-                        "outline-variant": "rgba(78, 70, 55, 0.25)",
-                        "on-background": "#e2e3df",
+                        "outline": "rgb(var(--outline) / <alpha-value>)",
+                        "background": "rgb(var(--background) / <alpha-value>)",
+                        "primary": "rgb(var(--primary) / <alpha-value>)",
+                        "on-primary": "rgb(var(--on-primary) / <alpha-value>)",
+                        "surface": "rgb(var(--surface) / <alpha-value>)",
+                        "surface-bright": "rgb(var(--surface-bright) / <alpha-value>)",
+                        "surface-container-lowest": "rgb(var(--surface-container-lowest) / <alpha-value>)",
+                        "surface-container-low": "rgb(var(--surface-container-low) / <alpha-value>)",
+                        "surface-container": "rgb(var(--surface-container) / <alpha-value>)",
+                        "surface-container-high": "rgb(var(--surface-container-high) / <alpha-value>)",
+                        "surface-container-highest": "rgb(var(--surface-container-highest) / <alpha-value>)",
+                        "on-surface": "rgb(var(--on-surface) / <alpha-value>)",
+                        "on-surface-variant": "rgb(var(--on-surface-variant) / <alpha-value>)",
+                        "outline-variant": "rgb(var(--outline-variant) / <alpha-value>)",
+                        "on-background": "rgb(var(--on-background) / <alpha-value>)",
                     },
                     borderRadius: {
                         "DEFAULT": "0.5rem",
@@ -70,49 +72,11 @@
             },
         }
     </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        .hero-gradient {
-            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.1), rgba(18, 20, 18, 0.95));
-        }
-        .gold-gradient {
-            background: linear-gradient(135deg, #f3be58 0%, #a67c00 100%);
-        }
-        .glass-nav {
-            background: rgba(18, 20, 18, 0.6);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(243, 190, 88, 0.1);
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #121412;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333533;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f3be58;
-        }
-    </style>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary antialiased">
 
 <!-- Header -->
-<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+<nav class="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
     <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase">WILDLENS RESERVE</a>
     <div class="hidden md:flex items-center gap-10">
         <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
@@ -120,6 +84,7 @@
         <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
     </div>
     <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" aria-label="Toggle theme">dark_mode</button>
         <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
         <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
             <span class="material-symbols-outlined text-2xl">menu</span>
@@ -149,8 +114,8 @@
 <!-- Hero Section -->
 <section class="relative min-h-screen w-full flex items-center justify-center lg:justify-start overflow-hidden">
     <!-- Background Layer (Mesh Gradient) -->
-    <div class="absolute inset-0 z-0 select-none pointer-events-none bg-[#0d0f0d]">
-        <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_30%,#f3be58_0%,transparent_30%),radial-gradient(circle_at_80%_70%,#412d00_0%,transparent_40%)]"></div>
+    <div class="absolute inset-0 z-0 select-none pointer-events-none bg-surface-container-lowest">
+        <div class="absolute inset-0 opacity-40 hero-mesh-radials"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
     </div>
@@ -168,7 +133,7 @@
                         <span class="w-6 h-[1px] bg-primary"></span>
                         <p class="text-primary font-label text-[9px] uppercase tracking-widest font-extrabold italic">Featured Sanctuary</p>
                     </div>
-                    <h3 class="text-white font-headline text-2xl lg:text-4xl italic font-bold leading-tight">The King's <br/>Respite</h3>
+                    <h3 class="text-on-surface dark:text-white font-headline text-2xl lg:text-4xl italic font-bold leading-tight">The King's <br/>Respite</h3>
                 </div>
             </div>
         </div>
@@ -180,7 +145,7 @@
                 <p class="font-label text-primary text-[10px] md:text-xs lg:text-sm uppercase tracking-[0.5em] font-extrabold italic text-center lg:text-left">The Expedition Collective • 2024</p>
             </div>
             
-            <h1 class="font-headline text-white text-3xl md:text-6xl lg:text-8xl leading-[1.15] lg:leading-[0.95] mb-10 lg:mb-16 drop-shadow-2xl font-bold opacity-0 animate-fade-in-up" style="animation-delay: 0.6s">
+            <h1 class="font-headline text-on-surface dark:text-white text-3xl md:text-6xl lg:text-8xl leading-[1.15] lg:leading-[0.95] mb-10 lg:mb-16 drop-shadow-2xl font-bold opacity-0 animate-fade-in-up" style="animation-delay: 0.6s">
                 Ordinary Travel Ends.<br/><span class="text-primary italic font-normal tracking-wide">Extraordinary</span><br class="hidden lg:block"/> Encounters Begin.
             </h1>
             
@@ -188,7 +153,7 @@
                 <a href="plan-safari-1.html" class="gold-gradient text-on-primary font-extrabold px-12 lg:px-16 py-5 lg:py-6 rounded-full shadow-[0_20px_50px_-10px_rgba(243,190,88,0.4)] hover:scale-105 active:scale-95 transition-all uppercase tracking-[0.4em] text-[10px] inline-block whitespace-nowrap min-w-[240px] sm:min-w-0">
                     Plan Your Safari
                 </a>
-                <a href="explore.html" class="bg-white/5 border border-white/10 text-white px-12 lg:px-16 py-5 lg:py-6 rounded-full hover:bg-white/10 transition-all uppercase tracking-[0.4em] text-[10px] backdrop-blur-3xl inline-block font-extrabold whitespace-nowrap min-w-[240px] sm:min-w-0">
+                <a href="explore.html" class="bg-black/5 dark:bg-white/5 border border-primary/10 text-on-surface dark:text-white px-12 lg:px-16 py-5 lg:py-6 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-all uppercase tracking-[0.4em] text-[10px] backdrop-blur-3xl inline-block font-extrabold whitespace-nowrap min-w-[240px] sm:min-w-0">
                     Explore Sanctums
                 </a>
             </div>
@@ -197,7 +162,7 @@
 
     <!-- Scroll Indicator -->
     <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce opacity-40 hover:opacity-100 transition-opacity z-20">
-        <span class="font-label text-[10px] tracking-[0.4em] uppercase text-white font-bold">Scroll</span>
+        <span class="font-label text-[10px] tracking-[0.4em] uppercase text-on-surface dark:text-white font-bold">Scroll</span>
         <div class="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"></div>
     </div>
 </section>
@@ -253,7 +218,7 @@
             <img alt="Maasai Mara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz_zEQbg_yO30otAylTVhsdbo3TQ-pK4FFPcthKadtf6E8rz8uxkQdGAI4AjzG3t5gR1vWZqp5l1GVKv9WJPlSlKqZ8hn5tXfiU5N2MO48mWf3FnQ9RoglvcAesiGxViun_NpzUjx1-Y7Eyghq9VCVmEGLENVgvCPDhl6RT0W4wwtXrqm03TEjc38daLMtYPUqmiIXRbdmzjJmEnl8s-bWYr6Q163nlY_y2N8VxSwfOxkAR6I26AnUmTns0nFJaa0VJ268_yzCMv4"/>
             <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
                 <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Kenya</p>
-                <h3 class="font-headline text-3xl md:text-5xl text-white mb-4">Maasai Mara</h3>
+                <h3 class="font-headline text-3xl md:text-5xl text-on-surface dark:text-white mb-4">Maasai Mara</h3>
                 <p class="text-on-surface/70 font-body text-sm md:text-base max-w-md transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">Home of the Great Migration and the world's most legendary predator sightings.</p>
             </div>
         </div>
@@ -263,7 +228,7 @@
             <img alt="Serengeti" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLbgByMfQ6FBinV6f2uMNN61J0dB-vgPnUCIn8t0x3vSw99bh1A2oeOsZcdpYElfe_iEX1LzuISzD_xXvi1ebTVuikSJVh34yiFw1QHXxvmL-apT5ek5WFTwBlBqJrQjFm_jQSf4gYA1iwscfHeNcEy0j3YqSIovQJElo9fdqPEEBmuZzVHD9KEmvETOCDDewRvRQlC-9ZXJCmQ1hHYWpW7Nm8E2gLGghOgbihUhC6VtL9JkzEdFUN2rM3ULyzD5Cau8Rhf_YAhw"/>
             <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
                 <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Tanzania</p>
-                <h3 class="font-headline text-3xl md:text-4xl text-white mb-4">Serengeti</h3>
+                <h3 class="font-headline text-3xl md:text-4xl text-on-surface dark:text-white mb-4">Serengeti</h3>
                 <p class="text-on-surface/70 font-body text-sm max-w-sm transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">An endless theater of life where the horizon is only broken by the movement of millions.</p>
             </div>
         </div>
@@ -273,7 +238,7 @@
             <img alt="Okavango" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO2m9Rd5WlSJQP9jDdWmpzZYfcv3mBJ7axXW8-F8yoKiOv99Tx-iRKAdi2_IP5J7q9DbwrxDf0ks__fgpCupb1SuGSgVgLRjtRYLi-zT4bwqeTMl7x0WNYfwILsV446p-L6aT5yF5JOKTCC-Y3WJP8eQcXI9m_VD__DKrKil0-8vmx-T_cQYYndCZV82rlDmyLVwzPvrYvcnO81jiR4Edq0VyNPBB0OEEwT1anZ_soctnrO7bIzo05mA-x6hDumLDhZKK_BXCUjZQ"/>
             <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
                 <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Botswana</p>
-                <h3 class="font-headline text-3xl md:text-4xl text-white mb-4">Okavango Delta</h3>
+                <h3 class="font-headline text-3xl md:text-4xl text-on-surface dark:text-white mb-4">Okavango Delta</h3>
                 <p class="text-on-surface/70 font-body text-sm max-w-sm transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">Navigate a water-bound paradise teeming with rare avian life and aquatic predators.</p>
             </div>
         </div>
@@ -283,7 +248,7 @@
             <img alt="Kaziranga" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] brightness-[0.7]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG9sqmJ9ALTMturbEW74TuoDWkZ3dd_4Z7Wyf_2UX-Z0iqp0VjUeBc8A-k0XEsoygVRp5bATrEJI6skSTp4ZHlPOjyCHNvQUua9QFcUnG_8uweeO_KGTJoaBK4sxCdGwXKlMdSBVg7_9z2zxC8sqIhxIVBV_630KuUFWXUo3H4YzLT93bO7Rt3kSXvz7nNFJhnCCGMBfI17Wucip4eVWuAcEqKPGVpoBIZ8IvN_FtN7LUh7QZNeFfpaY7rCnddFhpEuJk9uI-CqfU"/>
             <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-background/95 via-background/40 to-transparent">
                 <p class="text-primary font-label text-[10px] uppercase tracking-widest mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">India</p>
-                <h3 class="font-headline text-3xl md:text-5xl text-white mb-4">Kaziranga</h3>
+                <h3 class="font-headline text-3xl md:text-5xl text-on-surface dark:text-white mb-4">Kaziranga</h3>
                 <p class="text-on-surface/70 font-body text-sm md:text-base max-w-md transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">The misty sanctuary of the Great One-horned Rhinoceros and the elusive Bengal tiger.</p>
             </div>
         </div>
@@ -386,7 +351,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
                 <div class="absolute bottom-10 left-10 right-10">
                     <p class="text-primary font-label text-[10px] uppercase tracking-[0.5em] font-bold mb-4">Phase Insight</p>
-                    <p class="font-headline text-2xl text-white italic font-bold">"Precision is the difference between a trip and an epic."</p>
+                    <p class="font-headline text-2xl text-on-surface dark:text-white italic font-bold">"Precision is the difference between a trip and an epic."</p>
                 </div>
             </div>
         </div>
@@ -461,11 +426,11 @@
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('navbar');
         if (window.scrollY > 100) {
-            nav.classList.add('py-4', 'bg-[#121412]/90');
-            nav.classList.remove('py-5', 'bg-[#121412]/60');
+            nav.classList.add('py-4', 'bg-background/90');
+            nav.classList.remove('py-5', 'bg-background/60');
         } else {
-            nav.classList.remove('py-4', 'bg-[#121412]/90');
-            nav.classList.add('py-5', 'bg-[#121412]/60');
+            nav.classList.remove('py-4', 'bg-background/90');
+            nav.classList.add('py-5', 'bg-background/60');
         }
     });
 

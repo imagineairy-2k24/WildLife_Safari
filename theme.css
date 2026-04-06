@@ -1,0 +1,156 @@
+/**
+ * Theme tokens: light on html:not(.dark), dark on html.dark (exact prod RGB from former hex).
+ * Use html:not(.dark) instead of :root so light/dark tokens never fight Tailwind or other :root rules.
+ * Tailwind uses rgb(var(--name) / <alpha-value>); channels must be space-separated (not comma-separated).
+ */
+
+html:not(.dark) {
+    /* Light — space-separated channels for Tailwind rgb(var(--x) / a) */
+    --background: 249 250 247;
+    --on-background: 26 28 26;
+    --surface: 249 250 247;
+    --surface-bright: 255 255 255;
+    --surface-container-lowest: 255 255 255;
+    --surface-container-low: 243 244 240;
+    --surface-container: 237 238 234;
+    --surface-container-high: 231 233 228;
+    --surface-container-highest: 226 227 223;
+    --on-surface: 26 28 26;
+    --on-surface-variant: 68 72 62;
+    --outline: 117 120 107;
+    --outline-variant: 120 115 100;
+    --primary: 140 101 0;
+    --on-primary: 255 255 255;
+    --gold-gradient-end: 140 101 0;
+    --gold-gradient-mid: 140 101 0;
+    --glass-border: 243 190 88;
+}
+
+html.dark {
+    /* Dark (prod — same RGB as former hex, space-separated for rgb(var(--x) / a)) */
+    --background: 18 20 18;
+    --on-background: 226 227 223;
+    --surface: 18 20 18;
+    --surface-bright: 56 58 55;
+    --surface-container-lowest: 13 15 13;
+    --surface-container-low: 26 28 26;
+    --surface-container: 30 32 30;
+    --surface-container-high: 41 42 40;
+    --surface-container-highest: 51 53 51;
+    --on-surface: 226 227 223;
+    --on-surface-variant: 210 197 177;
+    --outline: 155 143 126;
+    --outline-variant: 78 70 55;
+    --primary: 243 190 88;
+    --on-primary: 65 45 0;
+    --gold-gradient-end: 166 124 0;
+    --gold-gradient-mid: 140 101 0;
+    --glass-border: 243 190 88;
+}
+
+[class*="bg-"],
+[class*="text-"],
+[class*="border-"],
+body,
+nav,
+footer,
+section {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+.hero-mesh-radials {
+    background-image: radial-gradient(
+            circle at 20% 30%,
+            rgb(var(--primary) / 0.4) 0%,
+            transparent 30%
+        ),
+        radial-gradient(circle at 80% 70%, rgb(var(--on-primary) / 0.4) 0%, transparent 40%);
+}
+
+.hero-gradient {
+    background: linear-gradient(
+        to bottom,
+        rgb(var(--background) / 0.1),
+        rgb(var(--background) / 0.95)
+    );
+}
+
+.hero-gradient--deep {
+    background: linear-gradient(
+        to bottom,
+        rgb(var(--background) / 0.2),
+        rgb(var(--background) / 0.95)
+    );
+}
+
+/* Photo heroes: keep dark unchanged; light mode needs a darker wash for contrast */
+html:not(.dark) .hero-gradient--deep {
+    background: linear-gradient(
+        to bottom,
+        rgb(0 0 0 / 0.45),
+        rgb(var(--background) / 0.92)
+    );
+}
+
+.gold-gradient {
+    background: linear-gradient(
+        135deg,
+        rgb(var(--primary)) 0%,
+        rgb(var(--gold-gradient-end)) 100%
+    );
+}
+
+.glass-nav {
+    background: rgb(var(--background) / 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgb(var(--glass-border) / 0.1);
+}
+
+.glass-cta {
+    background: rgb(var(--surface-container-high) / 0.85);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgb(var(--glass-border) / 0.1);
+}
+
+/* plan-safari-2 timeline panel: light readable glass without changing dark */
+html:not(.dark) .glass-panel {
+    background: rgb(255 255 255 / 0.78);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgb(var(--outline) / 0.2);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cinematic-shadow {
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(var(--surface-container-highest));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--primary));
+}
