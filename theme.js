@@ -16,11 +16,11 @@
         } catch (e) {}
     }
 
-    /* FOUC: apply before paint */
-    if (read() === "light") {
-        html.classList.remove("dark");
-    } else {
+    /* FOUC: default light; only add .dark when user chose dark */
+    if (read() === "dark") {
         html.classList.add("dark");
+    } else {
+        html.classList.remove("dark");
     }
 
     function setup() {
