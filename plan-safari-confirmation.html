@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;700;800&family=Birthstone&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
+    <link rel="stylesheet" href="theme.css"/>
+    <script src="theme.js"></script>
+    
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -19,20 +22,21 @@
             theme: {
                 extend: {
                     colors: {
-                        "outline": "#9b8f7e",
-                        "background": "#121412",
-                        "primary": "#f3be58",
-                        "on-primary": "#412d00",
-                        "surface": "#121412",
-                        "surface-bright": "#383a37",
-                        "surface-container-lowest": "#0d0f0d",
-                        "surface-container-low": "#1a1c1a",
-                        "surface-container": "#1e201e",
-                        "surface-container-high": "#292a28",
-                        "on-surface": "#e2e3df",
-                        "on-surface-variant": "#d2c5b1",
-                        "outline-variant": "rgba(78, 70, 55, 0.25)",
-                        "on-background": "#e2e3df",
+                        "outline": "rgb(var(--outline) / <alpha-value>)",
+                        "background": "rgb(var(--background) / <alpha-value>)",
+                        "primary": "rgb(var(--primary) / <alpha-value>)",
+                        "on-primary": "rgb(var(--on-primary) / <alpha-value>)",
+                        "surface": "rgb(var(--surface) / <alpha-value>)",
+                        "surface-bright": "rgb(var(--surface-bright) / <alpha-value>)",
+                        "surface-container-lowest": "rgb(var(--surface-container-lowest) / <alpha-value>)",
+                        "surface-container-low": "rgb(var(--surface-container-low) / <alpha-value>)",
+                        "surface-container": "rgb(var(--surface-container) / <alpha-value>)",
+                        "surface-container-high": "rgb(var(--surface-container-high) / <alpha-value>)",
+                        "surface-container-highest": "rgb(var(--surface-container-highest) / <alpha-value>)",
+                        "on-surface": "rgb(var(--on-surface) / <alpha-value>)",
+                        "on-surface-variant": "rgb(var(--on-surface-variant) / <alpha-value>)",
+                        "outline-variant": "rgb(var(--outline-variant) / <alpha-value>)",
+                        "on-background": "rgb(var(--on-background) / <alpha-value>)",
                     },
                     borderRadius: {
                         "DEFAULT": "0.5rem",
@@ -54,7 +58,7 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
         .hero-gradient {
-            background: linear-gradient(to bottom, rgba(18, 20, 18, 0.1), rgba(18, 20, 18, 0.95));
+            background: linear-gradient(to bottom, rgb(var(--background) / 0.1), rgb(var(--background) / 0.95));
         }
         .reveal {
             opacity: 0;
@@ -66,10 +70,10 @@
             transform: translateY(0);
         }
         .timeline-line {
-            background: linear-gradient(to bottom, #f3be58, rgba(243, 190, 88, 0.1));
+            background: linear-gradient(to bottom, rgb(var(--primary)), rgb(var(--glass-border) / 0.1));
         }
         .glass-card {
-            background: rgba(41, 42, 40, 0.6);
+            background: rgb(var(--surface-container-high) / 0.6);
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -78,7 +82,7 @@
 <body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col antialiased">
 
 <!-- Header -->
-<nav class="fixed top-0 w-full z-50 bg-[#121412]/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
+<nav class="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-3xl flex justify-between items-center px-8 py-5 border-b border-white/5 transition-all duration-500" id="navbar">
     <a href="index.html" class="text-xl font-headline italic text-primary font-bold tracking-widest uppercase mb-0.5">WILDLENS RESERVE</a>
     <div class="hidden md:flex items-center gap-10">
         <a href="explore.html" class="font-label text-[10px] tracking-[0.3em] text-on-surface-variant hover:text-primary uppercase transition-all font-bold">Explore</a>
@@ -86,6 +90,7 @@
         <a href="plan-safari-1.html" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2 rounded-full font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-on-primary transition-all font-bold">Plan Your Safari</a>
     </div>
     <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" aria-label="Toggle theme">dark_mode</button>
         <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform hidden md:block">account_circle</span>
         <button id="menu-toggle" class="md:hidden text-primary p-2 focus:outline-none">
             <span class="material-symbols-outlined text-2xl">menu</span>
@@ -109,11 +114,11 @@
     <!-- Hero Header -->
     <section class="relative h-[80vh] min-h-[600px] overflow-hidden">
         <img alt="Elephant herd at sunset" class="w-full h-full object-cover brightness-[0.7] animate-[zoom_20s_infinite_alternate]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBleryJb3bEcP0egg2c-1XYcu96B7aVnNvx0D9yNrPqDc4JhBxttKiPzNQ0FNz1OOfvIN0Xv9NtnJnTpx7QIp_pyGJb3nxQdQCCSZQaw-gplf2ymFbBEuCi2YkVjELlchsLSoBo7k0ByAzun68izPXSEq1wifPdoXkV_xKYeVZNs35le0zyuINAYSaAvljiZpCTEL89QikOoK9YFCQqELh6YbJZyARvKpeOrAnAZx5fXhRjWecNkpcxeV76BE0ZxeJQcGTBSEJFCgY"/>
-        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 hero-gradient--deep"></div>
         <div class="absolute inset-0 flex items-center justify-center pt-32 reveal">
             <div class="text-center px-6">
                 <span class="text-primary font-label text-[10px] uppercase tracking-[0.6em] mb-4 block font-bold">Inquiry Transmitted</span>
-                <h2 class="text-5xl md:text-8xl font-headline text-on-surface leading-tight tracking-tight font-bold">
+                <h2 class="text-5xl md:text-8xl font-headline text-white dark:text-on-surface leading-tight tracking-tight font-bold drop-shadow-lg">
                     Your Safari Planning<br/>
                     <span class="italic text-primary font-normal">Has Begun.</span>
                 </h2>
